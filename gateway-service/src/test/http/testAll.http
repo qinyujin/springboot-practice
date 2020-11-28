@@ -1,0 +1,19 @@
+GET http://localhost:8000/api/user/3?param=2
+Authorization: {{token}}
+Accept: application/json
+
+###
+POST http://localhost:8000/login
+Content-Type: application/json
+
+{
+  "name": "Qin",
+  "password": "123456"
+}
+
+> {% client.global.set("token", response.headers.valueOf("Authorization")); %}
+###
+GET http://localhost:8000/test1
+Authorization: asjfioj!@dioajfaiofa
+Accept: application/json
+###

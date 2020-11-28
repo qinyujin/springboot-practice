@@ -1,0 +1,8 @@
+POST http://localhost:8080/url
+Content-Type: application/json
+
+{
+  "url": "/api/user-name/-12/role/12"
+}
+
+###

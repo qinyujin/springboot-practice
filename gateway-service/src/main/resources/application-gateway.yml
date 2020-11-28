@@ -1,0 +1,20 @@
+server:
+  port: 8000
+spring:
+  redis:
+    password: 123456
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: login-service        #路由名，保证唯一
+          #          uri: lb://nacos-provider        #推荐使用，使用动态路由。lb：loadBanlance负载均衡,但是需要注册为服务
+          uri: http://localhost:8001       #不推荐使用，写死了端口，不能动态改变不需要注册为服务
+          predicates:                      #断言。满足条件则运行，有多种参数：path、after、before、between。
+            - Path=/**
+#            - After=2020-08-02T10:55:30.809+08:00[GMT+08:00]   #可以通过ZonedDateTime.now()获取
+      #        - id: nacos-getway-consumer
+      #          uri: lb://nacos-consumer
+      #          predicates:
+      #            - Path=/**

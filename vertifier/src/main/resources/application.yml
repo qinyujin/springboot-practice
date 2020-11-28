@@ -1,0 +1,15 @@
+spring:
+  redis:
+    cluster:
+      nodes: 124.71.176.134:7005,124.71.176.134:7006,124.71.176.134:7007,124.71.176.134:7008,124.71.176.134:7009,124.71.176.134:7010
+      max-redirects: 6
+    password: 123789uio
+    database: 0
+    lettuce:
+      shutdown-timeout: 5000
+      pool:
+        max-wait: 100
+        min-idle: 0
+        max-idle: 100
+        max-active: 500
+    timeout: 20000

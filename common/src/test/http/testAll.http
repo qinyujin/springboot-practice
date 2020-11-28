@@ -1,0 +1,17 @@
+POST http://localhost:7001/multiInsert
+Content-Type: application/json
+
+{
+  "userCourseList": [
+    {
+      "userId": 3,
+      "courseId": 4
+    },
+    {
+      "userId": 5,
+      "courseId": 7
+    }
+  ]
+}
+
+###

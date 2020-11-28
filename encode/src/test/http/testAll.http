@@ -1,0 +1,19 @@
+POST http://localhost:8080/api/test?sign=QinYuJin
+Content-Type: application/json
+
+{
+  "uid": 2,
+  "rid": 4
+}
+
+###
+POST http://localhost:8080/test?uid=2&rid=4
+Content-Type: application/json
+
+{
+  "uid": 2,
+  "rid": 4
+}
+
+
+###

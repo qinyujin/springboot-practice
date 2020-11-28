@@ -1,0 +1,10 @@
+privateKey: 7quY6Lmh4YOb5qK97Ii65r2X5oOk57Cu5q2s67Gg8KGGnOewv+q9nuyNuuiYhA==
+
+spring:
+  application:
+    name: login-service
+  redis:
+    password: 123456
+
+server:
+  port: 8001
