@@ -1,26 +1,32 @@
 package dataStructure.sort;
 
+import java.util.Arrays;
+
 /**
  * @author :覃玉锦
  * @create :2020-11-28 09:48:00
  * 快速排序法
+ * avg-o(nlogn) baddest-o(n^2)
  */
 public class KuaiPai {
     public static void main(String[] args) {
-        int[] arr = new int[80000];
-        for (int i = 0; i < 80000; i++) {
+        int[] arr = new int[8000000];
+        for (int i = 0; i < 8000000; i++) {
             arr[i]=(int)(Math.random()*800000);
         }
 //        int[] arr = {-9,78,0,23,-567,70};
+        System.out.println(Arrays.toString(arr));
         long begin = System.currentTimeMillis();
         quickSort(arr,0 , arr.length-1);
         long end = System.currentTimeMillis();
-        System.out.println("快排耗费时间："+(end-begin));
+        System.out.println(arr.length+"条数据快排耗费时间："+(end-begin));
+        System.out.println(Arrays.toString(arr));
     }
 
     /**
      * 快速排序法，简称快排
      * 核心思想就是以中轴线的数为基准，左边的全部比它小，右边的全部比它大进行排序
+     * 需要找到中轴线左边比他大的，右边比他小的，进行交换
      */
     public static void quickSort(int[] arr,int left,int right){
         int l = left;

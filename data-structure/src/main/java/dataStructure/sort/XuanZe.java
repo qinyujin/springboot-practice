@@ -4,6 +4,7 @@ package dataStructure.sort;
  * @author :覃玉锦
  * @create :2020-11-26 09:20:00
  * 选择排序
+ * avg-o(n^2) baddest-o(n^2)
  */
 public class XuanZe {
     public static void main(String[] args) {
@@ -14,11 +15,7 @@ public class XuanZe {
         long begin = System.currentTimeMillis();
         selectSort(arr);
         long end = System.currentTimeMillis();
-        System.out.println("选择排序耗费时间:"+(end-begin));
-
-        for (int i = 0; i < 10; i++) {
-            System.out.print(arr[i]+ " ");
-        }
+        System.out.println(arr.length+"条数据选择排序耗费时间:"+(end-begin));
     }
 
     public static void selectSort(int[] arr){

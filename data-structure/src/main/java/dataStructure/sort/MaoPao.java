@@ -4,6 +4,7 @@ package dataStructure.sort;
  * @author :覃玉锦
  * @create :2020-11-25 21:32:00
  * 冒泡排序的优化算法
+ * avg-o(n^2) baddest-o(n^2)
  */
 public class MaoPao {
     public static void main(String[] args) {
@@ -14,16 +15,12 @@ public class MaoPao {
         long begin = System.currentTimeMillis();
         bubbleSort(arr);
         long end = System.currentTimeMillis();
-        System.out.println("不优化的冒泡排序耗时："+(end-begin));
+        System.out.println(arr.length+"条数据不优化的冒泡排序耗时："+(end-begin));
 
         long begin2 = System.currentTimeMillis();
         bubbleSort2(arr);
         long end2 = System.currentTimeMillis();
-        System.out.println("优化的冒泡排序耗时："+(end2-begin2));
-
-        for (int i = 0; i < 10; i++) {
-            System.out.print(arr[i]+" ");
-        }
+        System.out.println(arr.length+"条数据优化的冒泡排序耗时："+(end2-begin2));
     }
 
     public static void bubbleSort(int[] arr){

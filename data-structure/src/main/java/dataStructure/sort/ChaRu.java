@@ -4,6 +4,7 @@ package dataStructure.sort;
  * @author :覃玉锦
  * @create :2020-11-26 14:08:00
  * 插入排序
+ * avg-o(n^2) baddest-o(n^2)
  */
 public class ChaRu {
     public static void main(String[] args) {
@@ -15,7 +16,7 @@ public class ChaRu {
         long begin = System.currentTimeMillis();
         insertSort(arr);
         long end = System.currentTimeMillis();
-        System.out.println("插入排序八万条数据耗时："+(end-begin));
+        System.out.println(arr.length+"条数据插入排序八万条数据耗时："+(end-begin));
     }
 
     public static void insertSort(int[] arr){

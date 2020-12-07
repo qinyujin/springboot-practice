@@ -4,6 +4,7 @@ package dataStructure.sort;
  * @author :覃玉锦
  * @create :2020-11-27 09:01:00
  * 希尔排序
+ * avg-o(nlogn) baddest-o(n^s) 1<s<2
  */
 public class XiEr {
     public static void main(String[] args) {
@@ -13,9 +14,9 @@ public class XiEr {
         }
 //        int[] arr = {8,9,1,7,2,3,5,4,6,0};
         long begin = System.currentTimeMillis();
-        shellSort(arr);
+//        shellSort(arr);
         long end = System.currentTimeMillis();
-        System.out.println("希尔排序(交换法)耗时："+(end-begin));
+        System.out.println(arr.length+"条数据希尔排序(交换法)耗时："+(end-begin));
 
         long begin2 = System.currentTimeMillis();
         shellSort2(arr);
