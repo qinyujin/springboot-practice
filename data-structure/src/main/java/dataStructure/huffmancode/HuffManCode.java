@@ -9,26 +9,30 @@ import java.util.*;
  * 赫夫曼编码，利用赫夫曼树的性质对传输数据进行编码
  */
 public class HuffManCode {
-    private static Map<Byte,String> huffmanCode = new HashMap<>();
+    //赫夫曼编码表
+    private static Map<Byte,String> huffmanCodeTab = new HashMap<>();
+    //赫夫曼树编码的长度
+    private static int huffmanCodeBitLength;
 
     public static void main(String[] args) throws Exception{
-        String contents = "i like like like java do you like a java you are lihai";
+        /*String contents = "i like like like java do you like a java 中国心";
         System.out.println("原始字符串："+contents);
         System.out.println("原始字符串对应字节序列："+Arrays.toString(contents.getBytes())+" 原始字符串字节序列长度："+contents.getBytes().length);
         byte[] bytes = huffmanZip(contents.getBytes());
         System.out.println("赫夫曼编码后的序列："+Arrays.toString(bytes)+" 序列的长度："+bytes.length);
         System.out.println("压缩率："+((float)bytes.length/(float)contents.getBytes().length));
-        System.out.println("还原后的字符串："+new String(decode(bytes, huffmanCode)));
+        System.out.println("还原后的字符串："+new String(decode(bytes, huffmanCodeTab)));*/
+
 
         /*        测试文件压缩          */
-        /*String srcFile = "E:\\srcFile.png";
+        /*String srcFile = "E:\\srcFile.txt";
         String dstFile = "E:\\dstFile.zip";
         zipFile(srcFile, dstFile);*/
 
         /*        测试文件解压          */
-        /*String zipFile = "E:\\dstFile.zip";
-        String dstFile = "E:\\srcFile2.png";
-        unzipFile(zipFile,dstFile);*/
+        String zipFile = "E:\\dstFile.zip";
+        String dstFile = "E:\\srcFile2.txt";
+        unzipFile(zipFile,dstFile);
 
     }
 
@@ -46,6 +50,9 @@ public class HuffManCode {
             ois = new ObjectInputStream(fis);
             byte[] bytes = (byte[]) ois.readObject();
             Map<Byte,String> code = (Map<Byte,String>)ois.readObject();
+            //记录长度
+            int length = (int)ois.readObject();
+            HuffManCode.huffmanCodeBitLength = length;
             byte[] decode = decode(bytes, code);
             fos = new FileOutputStream(dstFile);
             fos.write(decode);
@@ -83,7 +90,9 @@ public class HuffManCode {
             fos = new FileOutputStream(dstFile);
             oos = new ObjectOutputStream(fos);
             oos.writeObject(huffmanBytes);
-            oos.writeObject(huffmanCode);
+            oos.writeObject(huffmanCodeTab);
+            //记录长度
+            oos.writeObject(HuffManCode.huffmanCodeBitLength);
             System.out.println("压缩成功");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -107,10 +116,26 @@ public class HuffManCode {
     public static byte[] decode(byte[] huffmanBytes,Map<Byte,String> huffmanCode){
         StringBuilder stringBuilder = new StringBuilder();
         //还原成二进制
-        for (int i = 0; i < huffmanBytes.length; i++) {
+        //如果最后一位是01，这里解码会解成1，会导致少一位,最后一个字节需要单独处理
+        for (int i = 0; i < huffmanBytes.length-1; i++) {
             boolean flag = (i == huffmanBytes.length-1);
             stringBuilder.append(byteToString(!flag, huffmanBytes[i]));
         }
+        //最后一位根据赫夫曼树编码长度来判断
+        String lastByteStr = byteToString(false, huffmanBytes[huffmanBytes.length - 1]);
+        //如果长度正好，直接添加
+        if(stringBuilder.length() + lastByteStr.length() == HuffManCode.huffmanCodeBitLength){
+            stringBuilder.append(lastByteStr);
+        }
+        //长度不够
+        else {
+            //根据文件记录的长度来判断，不够的0填充
+            while (stringBuilder.length() + lastByteStr.length() < HuffManCode.huffmanCodeBitLength){
+                stringBuilder.append("0");
+            }
+            stringBuilder.append(lastByteStr);
+        }
+
         Map<String,Byte> map = new HashMap<>();
         //把赫夫曼表的key，value倒置一下，map形式为[01:32],[100:97]...
         for (Map.Entry<Byte, String> entry : huffmanCode.entrySet()) {
@@ -192,7 +217,7 @@ public class HuffManCode {
     public static byte[] huffmanEncode(byte[] bytes){
         StringBuilder huffcode = new StringBuilder();
         for (byte b : bytes) {
-            String r = huffmanCode.get(b);
+            String r = huffmanCodeTab.get(b);
             huffcode.append(r);
         }
 //        System.out.println("赫夫曼编码二进制形式："+huffcode);
@@ -215,6 +240,7 @@ public class HuffManCode {
             }
             huffmanCodeBytes[index++] = (byte) Integer.parseInt(strByte,2);
         }
+        HuffManCode.huffmanCodeBitLength = huffcode.length();
         return huffmanCodeBytes;
     }
 
@@ -244,7 +270,7 @@ public class HuffManCode {
         }
         //叶子节点，返回值就行
         else {
-            huffmanCode.put(node.data,stringBuilder2.toString());
+            huffmanCodeTab.put(node.data,stringBuilder2.toString());
         }
     }
 
