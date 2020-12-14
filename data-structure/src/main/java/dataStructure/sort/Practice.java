@@ -32,6 +32,9 @@ public class Practice {
         int[] radixArr = {99,35,93,21,8,58,80,68};
         radixSort(radixArr);
         System.out.println("基数："+Arrays.toString(radixArr));
+        int[] heapArr = {99,35,93,21,8,58,80,68};
+        heapSort(heapArr);
+        System.out.println("堆排："+Arrays.toString(heapArr));
     }
 
     /**
@@ -272,6 +275,48 @@ public class Practice {
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * 堆排 avg-o(nlogn) baddest-o(nlogn)
+     * @param arr
+     */
+    public static void heapSort(int[] arr){
+        int temp;
+        for (int i = arr.length/2-1; i >= 0; i--) {
+            adjustHeap(arr,arr.length,i);
+        }
+
+        for (int i = arr.length-1; i > 0; i--) {
+            temp = arr[i];
+            arr[i] = arr[0];
+            arr[0] = temp;
+            adjustHeap(arr, i,0);
+        }
+    }
+
+    /**
+     * 调整堆
+     * @param arr
+     * @param length
+     * @param i
+     */
+    public static void adjustHeap(int[] arr,int length,int i){
+        int temp = arr[i];
+
+        for (int j = 2*i+1; j < length; j=2*j+1) {
+            if(j+1<length && arr[j] < arr[j+1]){
+                j++;
+            }
+            if(arr[j] > temp){
+                arr[i] = arr[j];
+                i = j;
+            }
+            else {
+                break;
+            }
+            arr[i] = temp;
         }
     }
 }
