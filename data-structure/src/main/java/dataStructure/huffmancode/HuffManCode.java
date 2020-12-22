@@ -37,40 +37,6 @@ public class HuffManCode {
     }
 
     /**
-     * 解压文件
-     * @param zipFile 需要解压的文件
-     * @param dstFile 解压到哪个路径
-     */
-    public static void unzipFile(String zipFile,String dstFile){
-        FileInputStream fis = null;
-        FileOutputStream fos = null;
-        ObjectInputStream ois = null;
-        try {
-            fis = new FileInputStream(zipFile);
-            ois = new ObjectInputStream(fis);
-            byte[] bytes = (byte[]) ois.readObject();
-            Map<Byte,String> code = (Map<Byte,String>)ois.readObject();
-            //记录长度
-            int length = (int)ois.readObject();
-            HuffManCode.huffmanCodeBitLength = length;
-            byte[] decode = decode(bytes, code);
-            fos = new FileOutputStream(dstFile);
-            fos.write(decode);
-            System.out.println("解压成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fis.close();
-                fos.close();
-                ois.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
      * 使用赫夫曼编码对文件进行压缩
      * @param srcFile 需要压缩的文件全路径
      * @param dstFile 目标文件全路径
@@ -103,6 +69,40 @@ public class HuffManCode {
                 oos.close();
             } catch (IOException e) {
                 System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * 解压文件
+     * @param zipFile 需要解压的文件
+     * @param dstFile 解压到哪个路径
+     */
+    public static void unzipFile(String zipFile,String dstFile){
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
+        ObjectInputStream ois = null;
+        try {
+            fis = new FileInputStream(zipFile);
+            ois = new ObjectInputStream(fis);
+            byte[] bytes = (byte[]) ois.readObject();
+            Map<Byte,String> code = (Map<Byte,String>)ois.readObject();
+            //记录长度
+            int length = (int)ois.readObject();
+            HuffManCode.huffmanCodeBitLength = length;
+            byte[] decode = decode(bytes, code);
+            fos = new FileOutputStream(dstFile);
+            fos.write(decode);
+            System.out.println("解压成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fis.close();
+                fos.close();
+                ois.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
