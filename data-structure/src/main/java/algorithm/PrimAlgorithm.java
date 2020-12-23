@@ -25,8 +25,8 @@ public class PrimAlgorithm {
         MinTree tree = new MinTree();
         tree.createGraph(graph,vertexs,data,weight);
         tree.showGraph(graph);
-
-        tree.prim(graph,1);
+        System.out.println("开始构建最小生成树：");
+        tree.prim(graph,0);
     }
 }
 
@@ -56,12 +56,10 @@ class MinTree {
      */
     public void prim(MGraph graph,int v){
         int minWeight;
-        //标记是否访问过
+        //标记是否访问过，这里可以理解为顶点集
         boolean[] visited = new boolean[graph.vertexs];
-        /*for (int i = 0; i < visited.length; i++) {
-            visited[i] = false;
-        }*/
         visited[v] = true;
+        //两个顶点下标
         int h1=-1,h2=-1;
         //每次确定一条边，该边为权值最小边,n个顶点只有n-1条边，所以这里从1开始
         for (int k = 1; k < graph.vertexs; k++) {
@@ -90,6 +88,7 @@ class MinTree {
 class MGraph{
     int vertexs;
     char[] data;
+    //图的邻接矩阵，值为对应边的权值
     int[][] weight;
 
     public MGraph(int vertexs) {

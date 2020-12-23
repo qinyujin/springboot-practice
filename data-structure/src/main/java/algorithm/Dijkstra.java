@@ -6,6 +6,7 @@ import java.util.Arrays;
  * @author :覃玉锦
  * @create :2020-12-21 19:48:00
  * 迪杰斯特拉算法求解最短路径问题 图论
+ * 可以求出某一个顶到到其他顶点的最短路径
  */
 public class Dijkstra {
     public static void main(String[] args) {

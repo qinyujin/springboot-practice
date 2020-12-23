@@ -77,7 +77,7 @@ public class KruskalCase {
             int m = getEnd(ends,v1);
             int n = getEnd(ends,v2);
 
-            //判断是否形成回路，若没有形成回路，则v2就是v1的终点
+            //判断是否形成回路，若没有形成回路，则n就是m的终点
             //没有形成回路
             if(m!=n){
                 ends[m] = n;

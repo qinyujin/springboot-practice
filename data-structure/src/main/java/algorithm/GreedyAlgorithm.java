@@ -59,12 +59,16 @@ public class GreedyAlgorithm {
     /**
      * 使用贪心算法得出可以覆盖所有地区的最少广播台,每次选取未选择地区最多的广播台
      * @param broadcast 广播台集合，形如： k1         "北京","上海","深圳"
+     * @param allAreas 所有地区
      * @return 广播台集合
      */
     public static ArrayList<String> greedy(Map<String, HashSet<String>> broadcast,ArrayList<String> allAreas){
         HashSet<String> tempSet = new HashSet<>();
+        //选择的广播台集合
         ArrayList<String> selects = new ArrayList<>();
+        //记录最大未选择地区对应索引
         String maxKey;
+        //从所有地区中取出
         while (allAreas.size() != 0){
             maxKey = null;
             for (String key : broadcast.keySet()) {
