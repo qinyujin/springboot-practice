@@ -45,6 +45,7 @@ public class Kmp {
      */
     public static int[] kmpNext(String dest){
         int[] next = new int[dest.length()];
+        //i 和 j 代表两个下标，用来比较两个字符串
         for (int i = 1,j=0; i < dest.length(); i++) {
             //j大于0且不等，使用j = next[j-1]公式，kmp核心公式
             while (j>0 && dest.charAt(i) != dest.charAt(j)){

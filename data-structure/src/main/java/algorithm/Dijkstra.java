@@ -59,7 +59,7 @@ class Graph{
      */
     public void dijkstra(int index){
         vv = new VisitedVertex(vertexes.length,index);
-        //处理第一个结点
+        //处理第一个结点,第一次更新会把G点的邻接结点的dis全更新
         update(index);
         //处理剩下的结点
         for (int i = 1; i < vertexes.length; i++) {
@@ -158,7 +158,7 @@ class VisitedVertex{
     public int updateArr(){
         int min = 65535,index = 0;
         for (int i = 0; i < already_arr.length; i++) {
-            //在未访问的结点中找到值最小的
+            //在未访问的结点中找到值最小的，由于第一次更新把G点邻接结点dis都更新了，所以这里找最小dis相当于是找邻接结点
             if(already_arr[i]==0 && dis[i] < min){
                 min = dis[i];
                 index = i;

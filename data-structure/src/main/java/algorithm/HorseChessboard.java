@@ -22,8 +22,8 @@ public class HorseChessboard {
     public static void main(String[] args) {
         X = 6;
         Y = 6;
-        int row = 1;
-        int column = 2;
+        int row = 2;
+        int column = 5;
         int[][] chessboard = new int[X][Y];
         visited = new boolean[X*Y];
         long begin = System.currentTimeMillis();

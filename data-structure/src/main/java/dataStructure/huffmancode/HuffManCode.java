@@ -15,13 +15,13 @@ public class HuffManCode {
     private static int huffmanCodeBitLength;
 
     public static void main(String[] args) throws Exception{
-        /*String contents = "i like like like java do you like a java 中国心";
+        String contents = "i like like like java do you like a java";
         System.out.println("原始字符串："+contents);
         System.out.println("原始字符串对应字节序列："+Arrays.toString(contents.getBytes())+" 原始字符串字节序列长度："+contents.getBytes().length);
         byte[] bytes = huffmanZip(contents.getBytes());
         System.out.println("赫夫曼编码后的序列："+Arrays.toString(bytes)+" 序列的长度："+bytes.length);
         System.out.println("压缩率："+((float)bytes.length/(float)contents.getBytes().length));
-        System.out.println("还原后的字符串："+new String(decode(bytes, huffmanCodeTab)));*/
+        System.out.println("还原后的字符串："+new String(decode(bytes, huffmanCodeTab)));
 
 
         /*        测试文件压缩          */
@@ -30,9 +30,9 @@ public class HuffManCode {
         zipFile(srcFile, dstFile);*/
 
         /*        测试文件解压          */
-        String zipFile = "E:\\dstFile.zip";
+        /*String zipFile = "E:\\dstFile.zip";
         String dstFile = "E:\\srcFile2.txt";
-        unzipFile(zipFile,dstFile);
+        unzipFile(zipFile,dstFile);*/
 
     }
 
