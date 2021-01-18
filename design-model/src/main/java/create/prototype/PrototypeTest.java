@@ -11,7 +11,7 @@ public class PrototypeTest {
     public static void main(String[] args) throws CloneNotSupportedException {
         Video v = new Video();
         Date date = new Date();
-        v.setName("成人动作片");
+        v.setName("动作片");
         v.setCreateTime(date);
 
         Video v2 = (Video) v.clone();
