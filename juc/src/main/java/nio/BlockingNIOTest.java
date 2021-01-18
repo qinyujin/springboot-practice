@@ -21,29 +21,6 @@ public class BlockingNIOTest {
 
     /*----------------------不带反馈的------------------------*/
 
-    @Test
-    public void server1() throws IOException {
-        //1、获取通道，同样是本地io通道和网络通道，服务端使用serversocketChannel
-        ServerSocketChannel ssc = ServerSocketChannel.open();
-        FileChannel outChannel = FileChannel.open(Paths.get("2.jpg"),StandardOpenOption.WRITE,StandardOpenOption.CREATE);
-        //通道绑定端口
-        ssc.bind(new InetSocketAddress(8899));
-        //接收数据
-        SocketChannel accept = ssc.accept();
-        //2、创建缓冲区
-        ByteBuffer buf = ByteBuffer.allocate(1024);
-        while (accept.read(buf)!=-1){
-            buf.flip();
-            outChannel.write(buf);
-            buf.clear();
-        }
-
-        //3、关闭通道
-        outChannel.close();
-        ssc.close();
-        accept.close();
-    }
-
 
     @Test
     public void client1() throws IOException {
@@ -65,6 +42,29 @@ public class BlockingNIOTest {
         //4、关闭通道
         inChannel.close();
         sChannel.close();
+    }
+
+    @Test
+    public void server1() throws IOException {
+        //1、获取通道，同样是本地io通道和网络通道，服务端使用serversocketChannel
+        ServerSocketChannel ssc = ServerSocketChannel.open();
+        FileChannel outChannel = FileChannel.open(Paths.get("2.jpg"),StandardOpenOption.WRITE,StandardOpenOption.CREATE);
+        //通道绑定端口
+        ssc.bind(new InetSocketAddress(8899));
+        //接收数据
+        SocketChannel accept = ssc.accept();
+        //2、创建缓冲区
+        ByteBuffer buf = ByteBuffer.allocate(1024);
+        while (accept.read(buf)!=-1){
+            buf.flip();
+            outChannel.write(buf);
+            buf.clear();
+        }
+
+        //3、关闭通道
+        outChannel.close();
+        ssc.close();
+        accept.close();
     }
 
     /*----------------------带反馈的------------------------*/

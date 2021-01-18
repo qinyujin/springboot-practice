@@ -176,6 +176,7 @@ public class ChannelTest {
         MappedByteBuffer inBuf = inChannel.map(FileChannel.MapMode.READ_ONLY, 0, inChannel.size());
         MappedByteBuffer outBuf = outChannel.map(FileChannel.MapMode.READ_WRITE, 0, inChannel.size());
 
+        System.out.println("isDirect:"+inBuf.isDirect());
         //拿到缓冲区之后从in get，写道out里
         byte[] bytes = new byte[inBuf.limit()];
         inBuf.get(bytes);

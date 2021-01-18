@@ -18,6 +18,8 @@
         <module>enum</module>
         <module>data-structure</module>
         <module>juc</module>
+        <module>JVM</module>
+        <module>design-model</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
