@@ -9,13 +9,14 @@ public class Lazy {
     private Lazy(){
         System.out.println(Thread.currentThread().getName()+"lazy 构造");
     };
-    private static Lazy instance;
+
+    private volatile static Lazy instance;
 
     /**
      * 不做任何处理，有线程安全问题
      * @return
      */
-    public static  Lazy getInstance() {
+    public static Lazy getInstance() {
         if(instance==null){
             instance = new Lazy();
         }

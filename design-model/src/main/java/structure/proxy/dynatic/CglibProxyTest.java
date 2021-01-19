@@ -21,6 +21,7 @@ public class CglibProxyTest {
 }
 
 class Person{
+    private int num = 10;
     public void dream(){
         System.out.println("人往高处走，水往低处流");
     }
