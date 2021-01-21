@@ -8,7 +8,7 @@ package structure.adapter;
 public class Voltage220 {
     public int output(){
         int voltage = 220;
-        System.out.println("交流电压220V");
+        System.out.println("交流电压"+voltage+"V");
         return voltage;
     }
 }

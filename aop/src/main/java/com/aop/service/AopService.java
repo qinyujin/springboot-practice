@@ -13,6 +13,8 @@ public class AopService {
     public String aopTest(int x){
         log.info("AopService");
         if(x==0)return "hello world!";
-        else throw new RuntimeException("八伯怎么说");
+        else {
+            throw new RuntimeException("八伯怎么说");
+        }
     }
 }

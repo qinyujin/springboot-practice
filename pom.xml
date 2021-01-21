@@ -20,6 +20,7 @@
         <module>juc</module>
         <module>JVM</module>
         <module>design-model</module>
+        <module>interview-problems</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
