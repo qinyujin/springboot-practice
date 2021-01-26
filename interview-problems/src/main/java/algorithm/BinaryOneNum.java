@@ -15,9 +15,9 @@ public class BinaryOneNum {
     public int NumberOf1(int n) {
         //利用位与操作，每次能减少一个1,因为n-1比n少一位，所以只会有一位变化
         int count = 0;
-        while (n!=0){
+        while (n != 0) {
             count++;
-            n=n&(n-1);
+            n = n & (n - 1);
         }
         return count;
 //        return Integer.bitCount(n);
