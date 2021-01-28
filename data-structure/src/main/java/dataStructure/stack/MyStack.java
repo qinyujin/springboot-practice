@@ -7,8 +7,7 @@ import java.util.Scanner;
  * @create :2020-11-11 15:55:00
  * 栈，先入后出
  */
-
-class MyStackTest{
+public class MyStack {
     public static void main(String[] args) {
         MyStack myStack = new MyStack(4);
         String key = "";
@@ -42,9 +41,7 @@ class MyStackTest{
             }
         }
     }
-}
 
-public class MyStack {
     private int maxSize;
     private int[] stack =null;
     private int top=-1;//栈顶，默认为-1

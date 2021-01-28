@@ -4,35 +4,26 @@
  */
 public class Test {
     public static void main(String[] args) {
-        String str = "asdfashelloasf";
-        String temp = "fashiishell";
-
-        System.out.println(maxSubstring(str, temp));
+        System.out.println(new Test().test("12258"));
     }
 
-    public static String maxSubstring(String str1, String str2) {
-        String max = "", min = "", current = "";
-        //根据长度得出max和min两个字符串
-        if (str1.length() < str2.length()) {
-            min = str1;
-            max = str2;
-        } else {
-            min = str2;
-            max = str1;
-        }
-        int len = min.length();
-
-        //子串长度从最大的开始
-        for (int i = 0; i < len; i++) {
-            //end=len-i为子串的长度，是递减的，相当于从长度大的子串开始找起。begin和end同步移动，因为子串肯定是连续的
-            //如果找到符合的子串就return。因为是长度递减的寻找，所以一定是找到最大的
-            for (int begin = 0, end = len - i; end < len; begin++, end++) {
-                current = min.substring(begin, end+1);
-                if(max.contains(current)){
-                    return current;
-                }
+    public int test(String s){
+        if(s==null || s.length()==0)return -1;
+        int[] dp = new int[s.length()+1];
+        dp[0] = dp[1] = 1;
+        for (int i = 2; i <= s.length(); i++) {
+            int one = Integer.valueOf(s.substring(i-1,i));
+            if(one!=0){
+                dp[i]+=dp[i-1];
+            }
+            if(s.substring(i-2,i)=="0"){
+                continue;
+            }
+            int two = Integer.valueOf(s.substring(i-2,i));
+            if(two<=26){
+                dp[i]+=dp[i-2];
             }
         }
-        return null;
+        return dp[s.length()];
     }
 }

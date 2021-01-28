@@ -15,13 +15,13 @@ public class StrSort {
     public static void main(String[] args) {
         //算法笔记例子
         StrSort ss = new StrSort();
-        ss.n = 3;
+        /*ss.n = 3;
         ss.visited = new boolean[ss.n + 1];
-        ss.p = new int[ss.n + 1];
+        ss.p = new int[ss.n + 1];*/
 //        ss.generate(1);
 
         //剑指offer
-        ArrayList<String> abc = ss.Permutation("abc");
+        ArrayList<String> abc = ss.Permutation("ab");
         System.out.println(abc);
     }
 

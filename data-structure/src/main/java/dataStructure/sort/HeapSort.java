@@ -1,25 +1,50 @@
 package dataStructure.sort;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.PriorityQueue;
+
 /**
  * @author :覃玉锦
  * @create :2020-12-10 16:15:00
  * 堆排序，利用大顶/小顶堆来实现的排序。这里的树都是以数组形式体现的
  * avg-o(nlogn) baddest-o(nlogn)
+ *
+ * 除了手写实现堆，使用PriorityQueue也可以实现堆。默认为小顶堆，可以通过重写方法来实现大顶堆。
  */
 public class HeapSort {
     public static void main(String[] args) {
-        int[] arr = new int[80000];
+        /*int[] arr = new int[80000];
         for (int i = 0; i < 80000; i++) {
             arr[i]= (int)(Math.random()*800000);
-        }
-        /*int[] arr = {4,6,8,5,9};
-        heapSort(arr);
-        System.out.println(Arrays.toString(arr));*/
+        }*/
+        int[] arr = {4,6,8,5,9};
+//        heapSort(arr);
+        System.out.println(Arrays.toString(arr));
+
 
         long begin = System.currentTimeMillis();
-        heapSort(arr);
+//        heapSort(arr);
         long end = System.currentTimeMillis();
         System.out.println(arr.length+"条数据堆排序耗费时间："+(end - begin));
+
+
+
+        //PriorityQueue类底层是堆排序实现的。
+        System.out.println("===========PriorityQueue实现大/小顶堆===========");
+        //小顶堆
+//        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+        //大顶堆
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>((o1,o2)->o2-o1);
+        for (int i = 0; i < arr.length; i++) {
+            priorityQueue.add(arr[i]);
+        }
+        Iterator<Integer> iterator = priorityQueue.iterator();
+        while (iterator.hasNext()){
+            Integer next = iterator.next();
+            System.out.print(next+" ");
+        }
+        System.out.println();
     }
 
     /**

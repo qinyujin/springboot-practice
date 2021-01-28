@@ -64,7 +64,7 @@ public class PolandNotation {
             }
         }
         while (true){
-            if(s1.isEmpty())break;;
+            if(s1.isEmpty())break;
             Character pop = s1.pop();
             s2.push(pop);
         }
