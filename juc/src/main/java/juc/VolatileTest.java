@@ -3,6 +3,9 @@ package juc;
 /**
  * @author :覃玉锦
  * @create :2020-12-29 21:30:00
+ * volatile关键字的两个作用：
+ * 1、保证内存的可见性
+ * 2、保证指令不发生重排
  */
 public class VolatileTest {
     public static void main(String[] args) {

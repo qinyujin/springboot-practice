@@ -1,5 +1,7 @@
 package dataStructure;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 /**
  * @author :覃玉锦
  * @create :2020-11-04 20:32:00
@@ -7,6 +9,7 @@ package dataStructure;
  * 应用场景：棋盘的存储，使用稀疏数组
  * 模拟场景：0代表没有棋子，1代表黑子，2代表白子
  */
+@SpringBootApplication
 public class SparseArr {
     public static void main(String[] args) {
         int[][] oldArr = new int[11][11];

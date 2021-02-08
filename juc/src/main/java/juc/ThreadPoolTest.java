@@ -49,6 +49,23 @@ public class ThreadPoolTest {
         System.out.println(sum.get());
         //3、关闭线程池，两种方式shutdown 和 shutdownNow，前者会把当前线程任务执行完，且不接受新任务
         pool.shutdown();
+
+
+        //通过参数的方式创建线程池：参数：核心线程数、最大线程数、非核心线程存活时间、时间单位、等待队列、线程池工厂、拒绝策略
+        ExecutorService executor = new ThreadPoolExecutor(3, 5, 2L,
+                TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(3),
+                Executors.defaultThreadFactory(),
+                new ThreadPoolExecutor.AbortPolicy());
+
+        for (int i = 0; i < 9; i++) {
+            executor.execute(()->{
+                //6个以及之前时只有3个线程工作，因为超过3个在等待队列里。7个时有4个线程，8个5线程。9个执行拒绝策略，
+                //抛出异常
+                System.out.println(Thread.currentThread().getName() + "工作");
+            });
+        }
+        executor.shutdown();
     }
 }
 
