@@ -1,6 +1,7 @@
 package juc;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -12,11 +13,13 @@ public class AQSDemo {
     public static void main(String[] args) {
         //默认是非公平锁
         ReentrantLock lock = new ReentrantLock();
+        Condition condition = lock.newCondition();
 
         //银行案例，假设有3个顾客，第一个需要办理20分钟，其他俩顾客在候客区等待（CLH队列）。
         new Thread(() ->{
             lock.lock();
             try {
+                condition.await();
                 System.out.println(Thread.currentThread().getName()+" come in");
                 TimeUnit.MICROSECONDS.sleep(20);
             } catch (InterruptedException e) {
