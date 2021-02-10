@@ -21,6 +21,8 @@
         <module>JVM</module>
         <module>design-model</module>
         <module>interview-problems</module>
+        <module>redlock01</module>
+        <module>redlock02</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -39,6 +41,14 @@
     </properties>
 
     <dependencies>
+
+        <!--分布式锁的落地实现可以使用redisson-->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.11.1</version>
+        </dependency>
+
 <!--jwt-->
         <dependency>
             <groupId>com.auth0</groupId>
