@@ -3,7 +3,6 @@ package com.aimer.component;
 import com.aimer.component.dao.CourseDao;
 import com.aimer.component.dao.UserCourseDao;
 import com.aimer.component.dao.UserDao;
-import com.aimer.component.service.UserService;
 import com.aimer.component.util.RedisUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +26,10 @@ class CommonApplicationTest {
     private CourseDao courseDao;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private RedisUtil redisUtil;
 
     @Test
     @Transactional
     void testAll() throws Exception {
-        userService.update();
     }
 }

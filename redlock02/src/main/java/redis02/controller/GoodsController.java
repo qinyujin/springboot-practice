@@ -34,7 +34,7 @@ public class GoodsController {
     @Autowired
     private Redisson redisson;
 
-    private String REDIS_LOCK = "atguigulock";
+    private String REDIS_LOCK = "qyjlock";
 
     @Value("${server.port}")
     private String serverPort;
