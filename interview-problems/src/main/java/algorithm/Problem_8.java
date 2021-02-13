@@ -29,7 +29,7 @@ public class Problem_8 {
         n4.next = n2;
         n5.next = n2;
         n6.next = n5;
-        n7.next = n5;
+        n7.next = n6;
 
         Problem_8 ft = new Problem_8();
         System.out.println(ft.GetNext(n2));
