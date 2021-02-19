@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Date;
 import java.util.Iterator;
@@ -22,8 +22,8 @@ public class Practice {
     //1、本地通道实现文件的复制（非直接缓冲区或直接缓冲区）
     @Test
     public void test1() throws IOException {
-        FileChannel inChannel = FileChannel.open(Path.of("1.jpg"), StandardOpenOption.READ);
-        FileChannel outChannel = FileChannel.open(Path.of("2.jpg"), StandardOpenOption.READ,
+        FileChannel inChannel = FileChannel.open(Paths.get("1.jpg"), StandardOpenOption.READ);
+        FileChannel outChannel = FileChannel.open(Paths.get("2.jpg"), StandardOpenOption.READ,
                 StandardOpenOption.WRITE,
                 StandardOpenOption.CREATE);
 

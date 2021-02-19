@@ -15,7 +15,7 @@ public class Problem_33 {
 
     public boolean VerifySquenceOfBST(int [] sequence) {
         //二叉搜索树的后序序列最后一个数是root。
-        //所以思路是：
+        //所以思路是：参考左-右-根的顺序，然后根据左小右大的原则来。
         //1、找到root
         //2、找到第一个大于root的数
         //3、判断第一个数的右边是否都小于root（为什么不找左边，是因为找第一个大于的时候是顺序查找，保证左边都比第一个数大）

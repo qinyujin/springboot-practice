@@ -18,6 +18,7 @@ public class Problem_15 {
         int count = 0;
         while (n != 0) {
             count++;
+            //由于是二进制，减一会变动两位，因此与操作会相当于减少原来的一位1.例如 1010 减一获得 1001 与操作减少一位1得到 1000
             n = n & (n - 1);
         }
         return count;

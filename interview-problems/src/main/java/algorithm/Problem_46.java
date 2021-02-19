@@ -51,9 +51,11 @@ public class Problem_46 {
         dp[0] = dp[1] = 1 ;
         for (int i = 2; i <= s.length(); i++) {
             int one = Integer.valueOf(s.substring(i-1,i));
+            //个位数不是0，说明应该加上
             if(one!=0){
                 dp[i] += dp[i-1];
             }
+            //十位数不是0且在26的范围内，说明应该加上
             if(s.charAt(i-2)=='0'){
                 continue;
             }

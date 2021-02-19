@@ -40,12 +40,13 @@ public class Problem_51 {
         int t = 0;
         //1
         while (i <= mid && j <= right){
-            if(arr[i] < arr[j]){
+            if(arr[i] <= arr[j]){
                 temp[t++] = arr[i++];
             }
             else {
                 temp[t++] = arr[j++];
-                //mid+1：右边第一个下表 mid+1-i：由于左边是排序好的，因此从i到mid都是大于右边的，都需要逆序交换
+                //i>j 说明i-mid都是大于右边，都逆序，逆序数量为mid+1-i
+                //mid+1：右边第一个数的下标 mid+1-i：由于左边是排序好的，因此从i到mid都是大于右边的，都需要逆序交换
                 cnt = (cnt + (mid-i+1))%1000000007;
             }
         }

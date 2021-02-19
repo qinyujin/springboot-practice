@@ -16,7 +16,7 @@ public class Problem_21 {
     }
 
     /**
-     * 奇数在前面
+     * 奇数在前面，统计奇数/偶数的个数，然后从count开始放相应的数
      * @param array
      */
     public void reOrderArray(int [] array) {

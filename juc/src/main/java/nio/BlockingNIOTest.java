@@ -8,7 +8,6 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
@@ -70,8 +69,8 @@ public class BlockingNIOTest {
     /*----------------------带反馈的------------------------*/
     @Test
     public void client2() throws IOException {
-        //1、获取通道
-        FileChannel inChannel = FileChannel.open(Path.of("1.jpg"),StandardOpenOption.READ);
+        //1、获取通
+        FileChannel inChannel = FileChannel.open(Paths.get("1.jpg"),StandardOpenOption.READ);
         SocketChannel sChannel = SocketChannel.open(new InetSocketAddress("127.0.0.1",8899));
 
         //2、分配缓冲区
@@ -103,7 +102,7 @@ public class BlockingNIOTest {
     public void server2() throws IOException {
         //1、获取通道
         ServerSocketChannel ssc = ServerSocketChannel.open();
-        FileChannel outChannel = FileChannel.open(Path.of("2.jpg"),StandardOpenOption.WRITE,StandardOpenOption.CREATE);
+        FileChannel outChannel = FileChannel.open(Paths.get("2.jpg"),StandardOpenOption.WRITE,StandardOpenOption.CREATE);
           //指定端口
         ssc.bind(new InetSocketAddress(8899));
         //2、分配缓冲区

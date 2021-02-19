@@ -12,7 +12,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 
@@ -119,8 +119,8 @@ public class ChannelTest {
      */
     @Test
     public void test4() throws Exception{
-        SeekableByteChannel inChannel = Files.newByteChannel(Path.of("1.zip"), StandardOpenOption.READ);
-        SeekableByteChannel outChannel = Files.newByteChannel(Path.of("2.zip"), StandardOpenOption.READ,
+        SeekableByteChannel inChannel = Files.newByteChannel(Paths.get("1.zip"), StandardOpenOption.READ);
+        SeekableByteChannel outChannel = Files.newByteChannel(Paths.get("2.zip"), StandardOpenOption.READ,
                 StandardOpenOption.WRITE,
                 StandardOpenOption.CREATE);
 
@@ -143,8 +143,8 @@ public class ChannelTest {
      */
     @Test
     public void test3() throws Exception{
-        FileChannel inChannel = FileChannel.open(Path.of("1.zip"), StandardOpenOption.READ);
-        FileChannel outChannel = FileChannel.open(Path.of("2.zip"), StandardOpenOption.WRITE,
+        FileChannel inChannel = FileChannel.open(Paths.get("1.zip"), StandardOpenOption.READ);
+        FileChannel outChannel = FileChannel.open(Paths.get("2.zip"), StandardOpenOption.WRITE,
                 StandardOpenOption.READ,
                 StandardOpenOption.CREATE);
 
@@ -166,8 +166,8 @@ public class ChannelTest {
     public void test2() throws Exception{
         long begin = System.currentTimeMillis();
 
-        FileChannel inChannel = FileChannel.open(Path.of("1.zip"), StandardOpenOption.READ);
-        FileChannel outChannel = FileChannel.open(Path.of("2.zip"), StandardOpenOption.WRITE,
+        FileChannel inChannel = FileChannel.open(Paths.get("1.zip"), StandardOpenOption.READ);
+        FileChannel outChannel = FileChannel.open(Paths.get("2.zip"), StandardOpenOption.WRITE,
                 StandardOpenOption.READ
                 , StandardOpenOption.CREATE);
 

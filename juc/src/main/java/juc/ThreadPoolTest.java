@@ -52,13 +52,15 @@ public class ThreadPoolTest {
 
 
         //通过参数的方式创建线程池：参数：核心线程数、最大线程数、非核心线程存活时间、时间单位、等待队列、线程池工厂、拒绝策略
+        //拒绝策略有四种，abort丢弃+抛异常，discard丢弃没有异常，CallerRun交给调用线程池的线程去执行，如这里就是main线程
+        //执行，DiscardOldest把最早进入队列的线程移除，换成新的。
         ExecutorService executor = new ThreadPoolExecutor(3, 5, 2L,
                 TimeUnit.SECONDS,
                 new ArrayBlockingQueue<>(3),
                 Executors.defaultThreadFactory(),
-                new ThreadPoolExecutor.AbortPolicy());
+                new ThreadPoolExecutor.DiscardOldestPolicy());
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 10; i++) {
             executor.execute(()->{
                 //6个以及之前时只有3个线程工作，因为超过3个在等待队列里。7个时有4个线程，8个5线程。9个执行拒绝策略，
                 //抛出异常

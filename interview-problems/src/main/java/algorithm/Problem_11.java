@@ -30,7 +30,7 @@ public class Problem_11 {
         while (l < h) {
             //m为一段区间的中点值。
             int m = l + (h - l) / 2;
-            //target 为末尾元素
+            //target 为末尾元素，如果mid的值<末尾值说明是递增，也就是说旋转数组在另一段
             if (array[m] <= array[h])
                 h = m;
             else
