@@ -5,6 +5,7 @@ import com.aimer.component.entity.UserCourseVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ public class UserCourseController {
     private UserCourseDao userCourseDao;
 
     @PostMapping("multiInsert")
+    @Transactional
     public Map multiInsert(@RequestBody UserCourseVO userCourseList){
         if(userCourseList.getUserCourseList().size()==0) throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"参数为空！");
       log.info("传入参数："+userCourseList);

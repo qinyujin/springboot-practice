@@ -1,5 +1,10 @@
 package structure.proxy.dynatic;
 
+import sun.misc.ProxyGenerator;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -10,7 +15,7 @@ import java.lang.reflect.Proxy;
  * jdk代理只针对接口，使用Proxy.newProxyInstance 的反射的方式来获取新的代理对象。因为这个方法的第二个参数是接口集，所以只能接口使用
  */
 public class JDKDynamicProxyTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ClothFactory nike = new Nike();
         Human man = new Man();
         //一个代理类可以代理多个接口，对于任何接口都可以进行代理操作
@@ -19,9 +24,29 @@ public class JDKDynamicProxyTest {
         ClothFactory proxy = (ClothFactory) proxyFactory.getProxyObject(nike);
         //接口2
         Human proxy2 = (Human) proxyFactory.getProxyObject(man);
+        System.out.println(proxy.getClass().getName()); //$Proxy0
+        System.out.println(proxy2.getClass().getName()); //$Proxy1
 
         proxy.procudure();
         proxy2.sex();
+
+
+        //把代理对象类写入到硬盘来分析动态代理过程
+        String proxyName = "$Proxy0";
+        InvocationHandler h = new InvocationHandler() {
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                System.out.println("代理前");
+                Object invoke = method.invoke(nike, args);
+                System.out.println("代理后");
+                return invoke;
+            }
+        };
+        byte[] bytes = ProxyGenerator.generateProxyClass(
+                proxyName, nike.getClass().getInterfaces(), 1);
+        File file = new File("D:\\Idea\\ideaWorkplace\\springboot-practice\\design-model\\src\\main\\java\\structure\\proxy\\dynatic\\$Proxy.class");
+        FileOutputStream fos = new FileOutputStream(file);
+        fos.write(bytes);
     }
 }
 /*===========================接口1===========================*/

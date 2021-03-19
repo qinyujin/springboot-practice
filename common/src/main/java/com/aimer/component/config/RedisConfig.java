@@ -9,12 +9,14 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author :覃玉锦
  * @create :2020-08-11 16:00:00
  */
 @Configuration
+@EnableTransactionManagement
 public class RedisConfig {
 
     @Bean
