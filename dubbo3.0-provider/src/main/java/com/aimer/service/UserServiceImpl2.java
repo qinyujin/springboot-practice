@@ -1,7 +1,7 @@
-package com.Aimer.service;
+package com.aimer.service;
 
-//使用的是common模块中的类
-import com.Aimer.UserService;
+import com.aimer.UserService;
+import org.apache.dubbo.common.extension.SPI;
 import org.apache.dubbo.config.annotation.DubboService;
 
 /**
@@ -12,10 +12,10 @@ import org.apache.dubbo.config.annotation.DubboService;
  * @DubboService 才能使用dubbo查询到
  */
 //@Service
-@DubboService(version = "1.0")
-public class UserServiceImpl implements UserService {
+@DubboService(version = "2.0")
+public class UserServiceImpl2 implements UserService {
 
     public String getUser() {
-        return "Aimer";
+        return "Aimer2";
     }
 }

@@ -1,0 +1,21 @@
+//通过protobuf的格式定义接口契约，跨语言通用.文件目录需要注意，必须是main\proto\.proto才能在pom中编译
+syntax = "proto3";
+
+package api;
+
+option java_multiple_files = true;
+option java_package = "com.aimer.proto";
+option java_outer_classname = "UserServiceProto";
+
+service UserService{
+  rpc GetUser(UserRequest) returns (User) {}
+}
+
+message UserRequest{
+  string uid = 1;
+}
+
+message User{
+  string uid = 1;
+  string userName = 2;
+}

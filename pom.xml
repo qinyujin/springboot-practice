@@ -26,6 +26,7 @@
         <module>dubbo3.0-provider</module>
         <module>dubbo3.0-consumer</module>
         <module>dubbo3.0-common</module>
+        <module>dubbo3.0-simulate</module>
     </modules>
     <!--    springboot 依赖-->
     <!--    <parent>-->

@@ -1,4 +1,4 @@
-package com.Aimer;
+package com.aimer;
 
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;

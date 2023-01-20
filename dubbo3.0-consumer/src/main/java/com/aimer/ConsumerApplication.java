@@ -1,4 +1,4 @@
-package com.Aimer;
+package com.aimer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
