@@ -27,6 +27,7 @@
         <module>dubbo3.0-consumer</module>
         <module>dubbo3.0-common</module>
         <module>dubbo3.0-simulate</module>
+        <module>ElasticSearch</module>
     </modules>
     <!--    springboot 依赖-->
     <!--    <parent>-->
