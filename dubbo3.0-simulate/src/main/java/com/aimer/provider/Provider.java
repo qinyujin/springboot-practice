@@ -25,8 +25,10 @@ public class Provider {
         HttpServer httpServer = new HttpServer();
         httpServer.start("localhost", 8081);
 
-    }
+//        NettyServer nettyServer = new NettyServer();
+//        nettyServer.start("localhost", 8081);
 
+    }
 
 
 }

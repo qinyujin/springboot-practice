@@ -16,7 +16,7 @@ public class Consumer {
         String resp = httpClient.send("localhost", 8081, invocation);
         System.out.println("receives response:" + resp);*/
 
-        //rpc method
+        //rpc method. only care biz-Interface,no need to care about call details
         HelloService proxyService = ProxyFactory.getProxy(HelloService.class);
         String resp = proxyService.sayHello("xxx");
         System.out.println(resp);
