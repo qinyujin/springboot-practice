@@ -51,7 +51,7 @@ public class Problem_4 {
             }
             else {
                 //从i-m搜索
-                //如果这里是i，当区间在[left,right]时会死循环，所以i需要取值为i+1
+                //假设left为2 right为3，那么i=left+(right-left)/2永远是i=left，无法跳出循环
                 left = i;
             }
         }

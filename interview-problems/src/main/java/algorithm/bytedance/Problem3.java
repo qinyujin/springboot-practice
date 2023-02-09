@@ -13,8 +13,8 @@ public class Problem3 {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int[][] books = new int[n][3];
-        HashSet<Integer> set1 = new HashSet<>();
-        HashSet<Integer> set2 = new HashSet<>();
+        HashSet<Integer> set1 = new HashSet<Integer>();
+        HashSet<Integer> set2 = new HashSet<Integer>();
         int count = 0;
         for (int i = 0; i < n; i++) {
             //思考能否以o(n)来完成

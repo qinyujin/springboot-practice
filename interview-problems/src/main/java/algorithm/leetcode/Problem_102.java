@@ -37,14 +37,14 @@ public class Problem_102 {
      * 时，处理对应的逻辑，需要加入当前元素到list，然后把左右子节点加入队列
      */
     public List<List<Integer>> levelOrder(TreeNode root) {
-        LinkedList<TreeNode> queue = new LinkedList<>();
-        List<List<Integer>> res = new ArrayList<>();
+        LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
         queue.add(root);
         //如果队列不为空说明还有元素
         while (!queue.isEmpty()) {
             int cnt = queue.size();
             //把当前队列中的元素全部处理完，即遍历每一层
-            ArrayList<Integer> list = new ArrayList<>();
+            ArrayList<Integer> list = new ArrayList<Integer>();
             while (cnt-- > 0) {
                 TreeNode t = queue.poll();
                 //由于是左右都加入，有可能出现空，在此处理即可
