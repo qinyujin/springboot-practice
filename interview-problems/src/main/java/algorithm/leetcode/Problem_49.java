@@ -28,7 +28,7 @@ public class Problem_49 {
             Arrays.sort(chars);
             String key = new String(chars);
             if(!map.containsKey(key)){
-                map.put(key,new ArrayList<>(){{add(str);}});
+                map.put(key,new ArrayList<String>(){{add(str);}});
             }
             else {
                 List<String> strings = map.get(key);

@@ -19,7 +19,7 @@ public class Problem_105 {
         System.out.println();
     }
 
-    private HashMap<Integer,Integer> indexesOfIn = new HashMap<>();
+    private HashMap<Integer,Integer> indexesOfIn = new HashMap<Integer,Integer>();
     //思路：通过前序确定根节点，通过中序和根节点确定左右size。然后递归进行判断
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         for (int i = 0; i < inorder.length; i++) {

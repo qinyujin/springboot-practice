@@ -29,7 +29,7 @@ public class Problem_406 {
     //[[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]] 身高，前面大于等于该身高的数量
     //思路是可以先按照身高来入队列，如果遇到数量小当前res长度，那么就选择插入，到index位置，保证前面的大于它的数量小于
     public int[][] reconstructQueue(int[][] people) {
-        Arrays.sort(people,new Comparator<>(){
+        Arrays.sort(people,new Comparator<int[]>(){
             @Override
             public int compare(int[] o1, int[] o2) {
                 return o1[0] != o2[0] ? o2[0] - o1[0] : o1[1] - o2[1];

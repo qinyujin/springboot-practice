@@ -17,13 +17,13 @@ public class Problem_19 {
         ListNode r3 = new ListNode(3);
         r1.next = r2;
         r2.next = r3;
-        ListNode listNode = p.removeNthFromEnd(r1, 2);
-        System.out.println();
+        System.out.println(p.removeNthFromEnd(r1, 2));
     }
 
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        //思路:当cur 走了 n次，del再走从头一起走。当cur走到空时即del走到了倒数n个节点。目标是为了保持这个n的
-        //间距。1 2 3 null  由于有空和需要找前面一个节点。所以间距应该是n+2.即 如果n=1，那么当cur走到3时del再走
+        //思路:当cur 走了 n次，del再走从头一起走。当cur走到空时即del走到了倒数n个节点。目标是为了保持这个n的间距。
+        //1(head) 2 3 null  由于这里简单定义的listNode是有next属性，因此需要找到删除节点的前一个，然后使用.next=.next.next来删除。
+        //即 如果n=1，那么当cur走到3时del再走
         if (head == null) return null;
         ListNode cur = head;
         //删除的前一个节点.

@@ -13,7 +13,7 @@ public class Problem_139 {
     public static void main(String[] args) {
         Problem_139 p = new Problem_139();
         String s = "catsandog";
-        List<String> wordDict = new ArrayList<>(){{add("cats");add("dog");add("sand");add("and");add("cat");}};
+        List<String> wordDict = new ArrayList<String>(){{add("cats");add("dog");add("sand");add("and");add("cat");}};
         System.out.println(p.wordBreak(s, wordDict));
     }
 
