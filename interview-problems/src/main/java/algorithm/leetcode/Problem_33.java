@@ -9,37 +9,30 @@ package algorithm.leetcode;
 public class Problem_33 {
     public static void main(String[] args) {
         Problem_33 p = new Problem_33();
-        int[] nums = {4,5,6,7,0,1,2};
+        int[] nums = {4, 5, 6, 7, 0, 1, 2};
         System.out.println(p.search(nums, 3));
     }
 
+    //二分查找需要在有序数组上操作，由于旋转的特性，可以找到arr[mid],分为左右两部分，必定有一部分是递增的，即可以使用二分
     public int search(int[] nums, int target) {
-        //二分查找。当arr[mid] < arr[high] 就说明区间[mid,high]是递增的，说明旋转数组在另外一个区间
-        int l = 0,r = nums.length-1;
-        while (l<=r){
-            int mid = (l+r)/2;
-            if(nums[mid] == target){
+        int l = 0, r = nums.length - 1;
+        while (l <= r) {
+            int mid = (l + r) / 2;
+            if (nums[mid] == target) {
                 return mid;
-            }
-            //通过mid区分出两个区间：[0,mid] [mid+1,n-1]
-            //由于旋转，必定有一个是递增区间。就通过递增区间来判断
-            //左边是递增区间
-            else if(nums[0] <= nums[mid]){
-                if(nums[0] <= target && target < nums[mid]){
-                    r = mid-1;
+            } else if (nums[0] <= nums[mid]) {
+                //左区间递增[0,mid]，在左边[0,mid)使用二分来查找，递增的话也可以判断target是否在此区间中。若target不在区间中，继续调整查找区间.要处理下临界情况，target=nums[0]
+                if (nums[0] <= target && target < nums[mid]) {
+                    r = mid - 1;
+                } else {
+                    l = mid + 1;
                 }
-                else {
-                    l = mid+1;
-                }
-            }
-            //右边是递增区间，可以结合图示看一下，会发现右边的旋转部分全部比左边有序小。那么如果是右边递增，如果查找不再这个
-            //范围之内，就需要往左边区间去找。
-            else {
-                if(nums[mid] < target && target <= nums[nums.length-1]){
-                    l = mid+1;
-                }
-                else {
-                    r = mid-1;
+            } else {
+                //(mid,nums.length-1],临界:target=nums[nums.length-1]
+                if (nums[mid] < target && target <= nums[nums.length - 1]) {
+                    l = mid + 1;
+                } else {
+                    r = mid - 1;
                 }
             }
         }

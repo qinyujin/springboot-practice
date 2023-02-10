@@ -32,7 +32,7 @@ public class Problem_23 {
     }
 
     public ListNode mergeKLists(ListNode[] lists) {
-        //思路：使用小顶堆结构
+        //思路：使用小顶堆结构，小顶堆算法的实现参考结构二叉树
         PriorityQueue<Integer> queue = new PriorityQueue<>();
         for (ListNode list : lists) {
             while (list!=null){

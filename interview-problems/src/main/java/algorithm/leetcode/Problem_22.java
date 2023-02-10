@@ -40,7 +40,7 @@ public class Problem_22 {
             ans.add(cur.toString());
             return;
         }
-        //一半左括号
+        //max个左括号和max个右括号
         if(open < max){
             cur.append('(');
             //继续下一个括号
