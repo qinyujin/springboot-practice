@@ -12,11 +12,12 @@ import java.util.HashMap;
 public class Problem_1 {
     public static void main(String[] args) {
         Problem_1 p = new Problem_1();
-        int[] nums = {2,7,11,15};
+        int[] nums = {2, 7, 11, 15};
         int[] ints = p.twoSum(nums, 9);
         System.out.println(Arrays.toString(ints)); //[0,1]
     }
 
+    //时间 o(n)  空间 o(n)
     public int[] twoSum(int[] nums, int target) {
         //思路：由于是两数，可以那么可以先取一个，然后判断target-X是否存在
         HashMap<Integer, Integer> map = new HashMap<>();

@@ -12,30 +12,30 @@ import java.util.List;
 public class Problem_46 {
     public static void main(String[] args) {
         Problem_46 p = new Problem_46();
-        int[] nums = {1,2,3};
+        int[] nums = {1, 2, 3};
         List<List<Integer>> permute = p.permute(nums);
         System.out.println(permute);
     }
 
     //回溯
-    private List<List<Integer>> lists = new ArrayList<>();
     public List<List<Integer>> permute(int[] nums) {
-        backtrace(nums,new ArrayList<>(),new boolean[nums.length]);
+        List<List<Integer>> lists = new ArrayList<>();
+        backtrace(nums, new ArrayList<>(), new boolean[nums.length], lists);
         return lists;
     }
 
-    public void backtrace(int[] nums,List<Integer> list,boolean[] visited){
-        if(list.size() == nums.length){
+    public void backtrace(int[] nums, List<Integer> list, boolean[] visited, List<List<Integer>> lists) {
+        if (list.size() == nums.length) {
             lists.add(new ArrayList<>(list));
             return;
         }
         for (int i = 0; i < nums.length; i++) {
-            if(!visited[i]){
+            if (!visited[i]) {
                 visited[i] = true;
                 list.add(nums[i]);
-                backtrace(nums, list,visited);
+                backtrace(nums, list, visited, lists);
                 visited[i] = false;
-                list.remove(list.size()-1);
+                list.remove(list.size() - 1);
             }
         }
     }
