@@ -1,5 +1,7 @@
 package algorithm.leetcode;
 
+import java.util.LinkedList;
+
 /**
  * @author :覃玉锦
  * @create :2021-03-17 10:37:00
@@ -17,6 +19,7 @@ public class Problem_394 {
     }
 
     String src;
+
     int ptr;
 
     public String decodeString(String s) {
@@ -64,5 +67,35 @@ public class Problem_394 {
             ret = ret * 10 + src.charAt(ptr++) - '0';
         }
         return ret;
+    }
+
+    //通过栈来完成
+    public String decodeString_2(String s) {
+        LinkedList<Integer> numStack = new LinkedList();
+        LinkedList<String> strStack = new LinkedList<>();
+
+        int multi = 0;
+        StringBuilder res = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            if (c >= '0' && c <= '9') {
+                multi = multi * 10 + Integer.parseInt(c + "");
+            } else if (c == '[') {
+                numStack.addLast(multi);
+                strStack.addLast(res.toString());
+                multi = 0;
+                res = new StringBuilder();
+            } else if (c == ']') {
+                StringBuilder temp = new StringBuilder();
+                Integer times = numStack.removeLast();
+                for (Integer i = 0; i < times; i++) {
+                    temp.append(res);
+                }
+                res = new StringBuilder(strStack.removeLast() + temp);
+            } else {
+                res.append(c);
+            }
+        }
+
+        return res.toString();
     }
 }

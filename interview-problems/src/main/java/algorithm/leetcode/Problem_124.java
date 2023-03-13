@@ -23,18 +23,22 @@ public class Problem_124 {
 
     private int max = Integer.MIN_VALUE;
     public int maxPathSum(TreeNode root) {
-        if(root==null)return 0;
+        if (root == null) return 0;
         dfs(root);
         return max;
     }
 
-    public int dfs(TreeNode root){
-        if(root==null)return 0;
-        //如果是负数，不取
-        int leftMax = Math.max(0,dfs(root.left));
-        int rightMax = Math.max(0,dfs(root.right));
-        //左+当前+右
-        max = Math.max(max,root.val+leftMax+rightMax);
-        return root.val + Math.max(leftMax,rightMax);
+    //假设现在的子树为[a,b,c] b是左子节点，那么有3种情况(路径只能走一次，不能折返):
+    //1、b-a-c                                   这条路径不需要往上递归
+    //2、b-a-a.super(a的父节点) 或者 c-a-a.super   需要通过递归给到父节点
+    public int dfs(TreeNode root) {
+        if (root == null) return 0;
+        //如果左右子树最大路径是负数则不添加到路径中
+        int leftMax = Math.max(0, dfs(root.left));
+        int rightMax = Math.max(0, dfs(root.right));
+        //情况1有可能出现最大长度
+        max = Math.max(max, root.val + leftMax + rightMax);
+        //根据分析的情况2、3，这里是单边长度
+        return root.val + Math.max(leftMax, rightMax);
     }
 }

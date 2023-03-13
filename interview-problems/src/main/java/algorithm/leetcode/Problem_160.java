@@ -27,7 +27,8 @@ public class Problem_160 {
         System.out.println(intersectionNode.val);
     }
 
-    //两个链表的公共节点。思路：a+c+b = b+c+a c是公共段。即A走完了之后从B的头走，B走完从A的头走，相遇即可
+    //两个链表的公共节点。思路：a+c+b = b+c+a(c是交点后的公共段)，此公式表明，我们可以让指针1先走完a+c再指向b-head，走完b则会
+    //与指针2走完b+c再走a相遇，即两指针相等
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         ListNode l1 = headA,l2 = headB;
         while (l1!=l2){

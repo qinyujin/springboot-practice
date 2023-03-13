@@ -40,6 +40,7 @@ public class Problem_301 {
                 for (int j = 0; j < frontLen; j++) {
                     //只对括号处理
                     if(charArray[j] != '(' && charArray[j] != ')')continue;
+                    //把j的字符拿走
                     String next = new String(charArray,0,j) + new String(charArray,j+1,frontLen-j-1);
                     if(!visited.contains(next)){
                         queue.offer(next);

@@ -6,6 +6,7 @@ import algorithm.offer.TreeNode;
  * @author :覃玉锦
  * @create :2021-03-19 11:30:00
  * 把二叉搜索树转换为累加树
+ * https://leetcode.cn/problems/convert-bst-to-greater-tree/
  */
 public class Problem_538 {
     public static void main(String[] args) {

@@ -1,4 +1,6 @@
-package create.factory.abstract1;
+package create.factory.abstract1.product_instance_class;
+
+import create.factory.abstract1.product_categories.RouterProduct;
 
 /**
  * @author :覃玉锦

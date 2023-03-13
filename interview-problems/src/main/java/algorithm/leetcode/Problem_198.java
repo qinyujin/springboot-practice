@@ -14,9 +14,11 @@ public class Problem_198 {
     }
 
     //1,2,3,1 -> 4 解释：选择1+3。不能选择相邻的，所以1+3为最大。
-    //由于条件只是不相邻，所以f[i]可以拆分成小问题：f[i] = max(f[i-2]+nums[i],f[i-1])
+    //由于条件只是不相邻，所以f[i]可以拆分成小问题：f[i] = max(f[i-2]+nums[i],f[i-1])表示当前位置算上，加上前2之前的数组中
+    //的最大值，或者当前位置不选，则取决于前一个
     //例如 1,2,3,1 ->dp[1,2,4,4] 因为第四个2+1=3 是小于上一次的，因此取到4
     public int rob(int[] nums) {
+        //dp[i] : i位置能够获得的最大值
         int[] dp = new int[nums.length];
         int max = Integer.MIN_VALUE;
         if (nums.length == 1) return nums[0];

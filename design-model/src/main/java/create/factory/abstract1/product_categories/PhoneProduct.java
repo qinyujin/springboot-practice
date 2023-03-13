@@ -1,4 +1,4 @@
-package create.factory.abstract1;
+package create.factory.abstract1.product_categories;
 
 /**
  * @author :覃玉锦

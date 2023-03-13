@@ -20,14 +20,22 @@ public class Problem_98 {
         System.out.println(validBST);
     }
 
-    public boolean isValidBST(TreeNode root) {
-        return isValidBST(root,Long.MIN_VALUE,Long.MAX_VALUE);
-    }
+    private long pre = Long.MIN_VALUE;
 
-    //通过上下界来检查，如果node在区间内说明ok，在区间外说明false，通过递归调用改变上下界为node的值来判断子节点是否符合
-    public boolean isValidBST(TreeNode node,long lower,long upper){
-        if(node==null)return true;
-        if(node.val <= lower || node.val >= upper)return false;
-        return isValidBST(node.left,lower,node.val) && isValidBST(node.right,node.val,upper);
+    //中序为左、根、右，正好符合二叉搜索树的排序特点，因此使用中序遍历来判断
+    public boolean isValidBST(TreeNode root) {
+        if (root == null) return true;
+
+        //左子树即使为true，最终结果也还需要判断右子树
+        if (!isValidBST(root.left)) {
+            return false;
+        }
+        //根节点
+        if (root.val <= pre) {
+            return false;
+        }
+        pre = root.val;
+        //右子树
+        return isValidBST(root.right);
     }
 }

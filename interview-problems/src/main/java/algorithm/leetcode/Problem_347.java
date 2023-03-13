@@ -11,42 +11,45 @@ import java.util.*;
 public class Problem_347 {
     public static void main(String[] args) {
         Problem_347 p = new Problem_347();
-        int[] nums = {1,1,1,2,2,3};
+        int[] nums = {1, 1, 1, 2, 2, 3};
         int[] ints = p.topKFrequent(nums, 2);
         System.out.println(Arrays.toString(ints));
     }
 
     public int[] topKFrequent(int[] nums, int k) {
-        //先统计nums中的元素数量
+        //nums[i] => count(nums[i])
         HashMap<Integer, Integer> map = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
         }
-        //通过小顶堆来把数量最小的给推出去，最后只保留最大数量，数组[0]为key即数字,数组[1]为value即数量
-        PriorityQueue<int[]> queue = new PriorityQueue<>(new Comparator<int[]>() {
+
+        //最好画图来看，维护count的小顶堆，元素超过k时移除堆顶，那么剩余的则是大的数
+        PriorityQueue<Integer> minTopQueue = new PriorityQueue<>(new Comparator<Integer>() {
             @Override
-            public int compare(int[] o1, int[] o2) {
-                return o1[1] - o2[1];
+            public int compare(Integer a, Integer b) {
+                return map.get(a) - map.get(b);
             }
         });
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            if (queue.size() == k) {
-                //如果堆顶比现在的还小，那么把当前的元素加入到堆中
-                if(queue.peek()[1] < entry.getValue()){
-                    queue.poll();
-                    queue.offer(new int[]{entry.getKey(),entry.getValue()});
-                }
-            } else {
-                //0为key，1为value，堆会根据数量构建小顶
-                queue.offer(new int[]{entry.getKey(), entry.getValue()});
+
+        for (Integer key : map.keySet()) {
+            if (minTopQueue.size() < k) {
+                minTopQueue.add(key);
+            } else if (map.get(key) < map.get(minTopQueue.peek())) {
+                minTopQueue.remove();
+                minTopQueue.add(key);
             }
         }
-        System.out.println(queue.peek()[0]);
-        //最后的堆中只剩两个最大数量的值
-        int[] result = new int[k];
-        for (int i = 0; i < k; i++) {
-            result[i] = queue.poll()[0];
+
+        List<Integer> res = new ArrayList<>();
+        while (!minTopQueue.isEmpty()) {
+            res.add(minTopQueue.remove());
         }
-        return result;
+
+        int[] arr = new int[res.size()];
+        int i = 0;
+        for (Integer re : res) {
+            arr[i++] = re;
+        }
+        return arr;
     }
 }

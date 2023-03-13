@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class Problem_322 {
     public static void main(String[] args) {
         Problem_322 p = new Problem_322();
-        int[] coins = {1,2,5};
+        int[] coins = {1, 2, 5};
         System.out.println(p.coinChange(coins, 11));
     }
 
@@ -19,7 +19,7 @@ public class Problem_322 {
         int max = amount + 1;
         //dp[i] 表示i金额需要的最少硬币数
         int[] dp = new int[amount + 1];
-        //最差情况下需要amount枚1元。因此这里设置为amount+1初始化为最大值
+        //由于最多的情况是amount枚一元硬币，所以amount+1肯定比所有情况都大。这里是初始化值
         Arrays.fill(dp, max);
         dp[0] = 0;
         //统计从金额1-金额amount最小需要硬币数

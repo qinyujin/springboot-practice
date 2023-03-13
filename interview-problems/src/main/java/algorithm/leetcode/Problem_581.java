@@ -1,7 +1,5 @@
 package algorithm.leetcode;
 
-import java.util.Stack;
-
 /**
  * @author :覃玉锦
  * @create :2021-03-19 12:50:00
@@ -15,28 +13,27 @@ public class Problem_581 {
         System.out.println(p.findUnsortedSubarray(nums));
     }
 
-    //2,6,4,8,10,9,15 ->5 因为需要排序[6, 4, 8, 10, 9]
-    //可以通过排序之后，找到两个数组中不同位置的最大和最小值。
-    //2,6,4,8,10,9,15 sort-> 2,4,6,8,9,10,15  不同位置是 1,2 4,5    那么结果就是5-1+1 时间复杂度是nlog(n)
-    //可以使用栈来记录不同位置的最大最小值，可以优化成o(n)
+    //一次遍历 时间o(n).只需要确定中间的左右两指针位置即可，如何确定指针位置：以右指针为例，找到最大值，如果右边比最大小，更新右
+    //指针。左指针相反
     public int findUnsortedSubarray(int[] nums) {
-        int l = nums.length-1,r = 0;
-        Stack<Integer> stack = new Stack<>();
+        int n = nums.length;
+        int maxn = Integer.MIN_VALUE, right = -1;
+        int minn = Integer.MAX_VALUE, left = -1;
         for (int i = 0; i < nums.length; i++) {
-            //保证栈是单调递增，因此就可以找到第一个下降点。例如2,6,4 stack{2,6} 符合条件，弹出6的下标1作为l
-            while (!stack.isEmpty() && nums[stack.peek()] > nums[i]){
-                l = Math.min(l,stack.pop());
+            if (maxn > nums[i]) {
+                right = i;
+            } else {
+                maxn = nums[i];
             }
-            stack.push(i);
-        }
-        stack.clear();
-        for (int i = nums.length - 1; i >= 0; i--) {
-            //通过单调递减的栈来得到不同位置的最大下标
-            while (!stack.isEmpty() && nums[stack.peek()] < nums[i]){
-                r = Math.max(r,stack.pop());
+
+            //left
+            if (minn < nums[n - 1 - i]) {
+                left = n - 1 - i;
+            } else {
+                minn = nums[n - 1 - i];
             }
-            stack.push(i);
         }
-        return r-l <= 0 ? 0 : r-l+1;
+
+        return right == -1 ? 0 : right - left + 1;
     }
 }

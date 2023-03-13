@@ -26,7 +26,7 @@ public class Problem_309 {
         dp[0][0] = 0;
         //第一天持股即表示买入，支出为prices[0]
         dp[0][1] = -prices[0];
-        //第一天不持股卖出相当于买入又卖出为0
+        //第一天持股卖出相当于买入又卖出为0
         dp[0][2] = 0;
 
         for (int i = 1; i < prices.length; i++) {

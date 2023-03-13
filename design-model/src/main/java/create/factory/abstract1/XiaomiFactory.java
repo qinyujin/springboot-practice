@@ -1,5 +1,10 @@
 package create.factory.abstract1;
 
+import create.factory.abstract1.product_categories.PhoneProduct;
+import create.factory.abstract1.product_categories.RouterProduct;
+import create.factory.abstract1.product_instance_class.XiaomiPhone;
+import create.factory.abstract1.product_instance_class.XiaomiRouter;
+
 /**
  * @author :覃玉锦
  * @create :2021-01-18 12:45:00

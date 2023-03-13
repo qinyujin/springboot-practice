@@ -12,24 +12,25 @@ import java.util.List;
 public class Problem_448 {
     public static void main(String[] args) {
         Problem_448 p = new Problem_448();
-        int[] nums = {4,3,2,7,8,2,3,1};
+        int[] nums = {4, 3, 2, 7, 8, 2, 3, 1};
         System.out.println(p.findDisappearedNumbers(nums));
     }
 
-    //查找从1-n中没有出现的数字。思路:可以利用nums作为哈希表，把原始数据全部增加到n以上
+    //查找从1-n中没有出现的数字。思路:原本出现的数字相当于占了一部分的槽位，通过hash变化来计算,下标经过哈希
     //4,3,2,7,8,2,3,1
     public List<Integer> findDisappearedNumbers(int[] nums) {
-        int n =nums.length;
+        int n = nums.length;
         for (int num : nums) {
-            //为什么是num-1和为什么取余：例如1的下标哈希值应该对应是0.所以需要减一。为什么取余?像这里2出现多次，那么如果
-            //加起来超过了n，就需要取余来确定原始的值。这样数组里出现的数字经过哈希映射，数组中对应下标的值都超过了n
-            int x = (num-1)%n;
-            nums[x] += n;
+            //由于nums[i]是[1,n]的范围，如果要对应到下标，就是n-1
+            //映射成下标之后，相当于当前n范围内有多少数字占用了哪个槽位是可以确定的，对于这些下标+n，那么已占用槽位的下标符合
+            //nums[i]>n。剩余槽位都没操作过，则满足nums[i]<=n.最后的结果则是需要还原i+1，反映射回去
+            int index = (num - 1) % n;
+            nums[index] += n;
         }
         List<Integer> ret = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            if(nums[i] <= n){
-                ret.add(i+1);
+            if (nums[i] <= n) {
+                ret.add(i + 1);
             }
         }
         return ret;

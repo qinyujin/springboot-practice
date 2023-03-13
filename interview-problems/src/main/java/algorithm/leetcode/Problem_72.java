@@ -16,14 +16,15 @@ public class Problem_72 {
     }
 
     //思路：假设dp[i][j] 为 字符串1 到i位置变换成 字符串2 到j位置需要多少次。
-    //有这么几种情况：增、删、改
-    //增：dp[i][j] = dp[i][j-1]+1 为啥它是增：因为本来是i-1，增加一位就是i，所以是dp[i][j-1]
+    //有这么几种情况：增、删、改.增和删其实是相反的两个步骤，至于i-1还是j-1完全取决于两个字符串哪个长哪个短，这里可以统一假设为左长右短。
+    // 那么增可以视为右字符串少一个，右边需要增加，因此为dp[i][j-1]+1    删则可以视为左边多一个，左边进行删除dp[i-1][j]+1
+    //增：dp[i][j] = dp[i][j-1]+1
     //删：dp[i][j] = dp[i-1][j]+1
     //改：dp[i][j] = dp[i-1][j-1]+1
     //那如果i-1 和j-1 对应的字符一样，就不用加一
     public int minDistance(String word1, String word2) {
         int m = word1.length(), n = word2.length();
-        int[][] dp = new int[m+1][n+1];
+        int[][] dp = new int[m + 1][n + 1];
         //先处理长度为0的情况，两种，一种是word1为0，一种是word2为0.
         //1：
         for (int i = 0; i <= m; i++) {

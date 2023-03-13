@@ -20,15 +20,15 @@ public class Problem_560 {
     public int subarraySum(int[] nums, int k) {
         HashMap<Integer,Integer> mp = new HashMap<>();
         mp.put(0,1);
-        int pre = 0;
+        int curSum = 0;
         int res = 0;
         for (int num : nums) {
             //当前序列和
-            pre+=num;
-            if(mp.containsKey(pre-k)){
-                res+=mp.get(pre-k);
+            curSum+=num;
+            if(mp.containsKey(curSum-k)){
+                res+=mp.get(curSum-k);
             }
-            mp.put(pre,mp.getOrDefault(pre,0)+1);
+            mp.put(curSum,mp.getOrDefault(curSum,0)+1);
         }
         return res;
     }

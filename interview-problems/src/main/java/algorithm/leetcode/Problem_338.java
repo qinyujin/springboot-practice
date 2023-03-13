@@ -17,16 +17,17 @@ public class Problem_338 {
 
     //奇数的1总比减一的偶数大1.因为增加的是最低位。如  0 1    10 11
     //偶数的1和它除2的1数量相等，因为偶数最低位是0，除2相当于右移一位，也就是移除掉0.如100 10
-    public int[] countBits(int num) {
-        int[] dp = new int[num+1];
+    public int[] countBits(int n) {
+        int[] dp = new int[n + 1];
         //0的1数量为0
         dp[0] = 0;
-        for (int i = 1; i <= num; i++) {
+        for (int i = 1; i <= n; i++) {
             //奇数的话应该等于偶数+1
-            if(i%2==1){
-                dp[i] = dp[i-1]+1;
+            if (i % 2 == 1) {
+                dp[i] = dp[i - 1] + 1;
             }
-            else dp[i] = dp[i>>1];
+            //i/2 == i>>1  >>:二进制右移一位
+            else dp[i] = dp[i / 2];
         }
         return dp;
     }

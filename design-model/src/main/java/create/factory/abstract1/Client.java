@@ -1,5 +1,8 @@
 package create.factory.abstract1;
 
+import create.factory.abstract1.product_categories.PhoneProduct;
+import create.factory.abstract1.product_categories.RouterProduct;
+
 /**
  * @author :覃玉锦
  * @create :2021-01-18 12:46:00

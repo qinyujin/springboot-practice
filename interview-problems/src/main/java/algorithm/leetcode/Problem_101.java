@@ -23,7 +23,7 @@ public class Problem_101 {
         System.out.println(p.isSymmetric(r1));
     }
 
-    //思路：左子树等于右子树，左的右等于右的左
+    //思路：左子树等于右子树，左的子右等于右的子左
     public boolean isSymmetric(TreeNode root) {
         if(root==null || (root.left ==null && root.right ==null))return true;
         return isSymmetric(root.left,root.right);

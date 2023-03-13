@@ -13,8 +13,8 @@ public class Problem_104 {
 
     }
 
-    //思路:如果节点是null返回0，否则返回1+左右子树中最大值。
+    //思路:如果节点是null返回0，否则返回1(本层高度为1)+左右子树中最大值。
     public int maxDepth(TreeNode root) {
-        return root==null ? 0 : 1+ Math.max(maxDepth(root.left),maxDepth(root.right));
+        return root == null ? 0 : 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
     }
 }

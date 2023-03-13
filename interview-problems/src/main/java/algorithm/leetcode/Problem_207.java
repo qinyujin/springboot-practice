@@ -7,9 +7,11 @@ import java.util.Queue;
 
 /**
  * @author :覃玉锦
- * @create :2021-03-12 19:13:00
+ * @create :2021-03-12 19:13:01
  * 课程表
  * https://leetcode-cn.com/problems/course-schedule/
+ *
+ * 需要构造一个有向图，并且结合顶点指向的边集合、顶点入度等来判断
  */
 public class Problem_207 {
     public static void main(String[] args) {
@@ -35,6 +37,7 @@ public class Problem_207 {
             edges.add(new ArrayList<Integer>());
         }
         indeg = new int[numCourses];
+        //初始化边信息和各顶点入度信息
         for (int[] info : prerequisites) {
             edges.get(info[1]).add(info[0]);
             ++indeg[info[0]];
@@ -49,12 +52,13 @@ public class Problem_207 {
             }
         }
 
+        //符合的节点数
         int visited = 0;
         while (!queue.isEmpty()) {
             //相当于当前课程已经修完了，出队列，并且统计次数
             ++visited;
             int u = queue.poll();
-            //获取当前节点的所有边，即指向的节点
+            //获取当前节点的所有边，即指向的节点0
             for (int v: edges.get(u)) {
                 //维护该节点的入度
                 --indeg[v];

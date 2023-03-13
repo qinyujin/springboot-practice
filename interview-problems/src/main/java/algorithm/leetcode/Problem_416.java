@@ -14,8 +14,9 @@ public class Problem_416 {
         System.out.println(p.canPartition(nums));
     }
 
-    //[1, 5, 11, 5] 题目可以转换为寻找到 [0-11] 的dp。即背包问题.行是1,5,11,5 列是0-11
-    //dp[i][j] 为从1-i中是否有集合可以等于j
+    //可以转换成背包问题，理解为dp[i][j]中，j为背包容量，在1-i区间中放入元素，最后等于j.
+    //定义dp[i][j] 为从1-i区间中是否有集合可以使和等于j
+    //每一个数字可以选择或不选择，对应的公式为：dp[i][j] = dp[i-1][j](当前不选择，则结果取决于0至i-1的部分) || dp[i-1][j-nums[i]](当前选择了，则j变为j-nums[i])
     public boolean canPartition(int[] nums) {
         int len = nums.length;
         int sum = 0;
@@ -25,9 +26,11 @@ public class Problem_416 {
         //奇数是找不到的，因为只要能分为两组一样的，那么奇数*2 或者偶数*2都是偶数
         if ((sum & 1) == 1) return false;
 
+        //整体拆为部分，即讨论 x = sum/2 以及剩余数字能否构成x的问题。
         int target = sum / 2;
         //len即物品，target+1 是容量，从0到target所以要+1
         boolean[][] dp = new boolean[len][target + 1];
+        //dp[0][x] : 小等于0的区间，是否可以装入x
         if (nums[0] <= target) {
             dp[0][nums[0]] = true;
         }
@@ -45,7 +48,7 @@ public class Problem_416 {
 
                 //如果nums[i] < j 可以把nums[i]先放入背包即 j-nums[i]
                 if (nums[i] < j) {
-                    dp[i][j] = dp[i - 1][j] | dp[i - 1][j - nums[i]];
+                    dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i]];
                 }
             }
         }

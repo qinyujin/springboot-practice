@@ -22,6 +22,7 @@ public class Problem_438 {
         ArrayList<Integer> res = new ArrayList<>();
         int n = s.length(),m = p.length();
         if (p.length() > s.length()) return res;
+        //统计字母数量
         int[] scnt = new int[26];
         int[] pcnt = new int[26];
         //把字符对应位置统计一下
@@ -32,7 +33,7 @@ public class Problem_438 {
         //0下标有相等的
         if(Arrays.equals(scnt, pcnt))res.add(0);
         for (int i = m; i < n; i++) {
-            //窗口移动，对于s窗口来说，左边的出窗口，右边的进入窗口
+            //窗口范围:[i-m,i]，这里统计了数量
             scnt[s.charAt(i-m)-'a']--;
             scnt[s.charAt(i)-'a']++;
             if(Arrays.equals(scnt,pcnt))res.add(i-m+1);

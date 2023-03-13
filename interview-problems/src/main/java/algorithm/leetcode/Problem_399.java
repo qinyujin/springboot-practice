@@ -21,7 +21,7 @@ public class Problem_399 {
         equations.add(s1);
         equations.add(s2);
 
-        double[] values = {2.0,3.0};
+        double[] values = {2.0, 3.0};
         List<List<String>> queries = new ArrayList<>();
         ArrayList<String> q1 = new ArrayList<>();
         q1.add("a");
@@ -49,31 +49,34 @@ public class Problem_399 {
         System.out.println(Arrays.toString(doubles));
     }
 
-    //并查集
+    //并查集的性质：1、用于处理动态连通性问题。2、并查集支持查询、合并两操作。3、并查集只关注两个节点是否在一个联通分量中
+
+    //并查集.比如a/b=2 b/c=3 求a/c=?可以转化为  6c(a可以求出为6c)/c=6。即不管计算什么结果都可以转化成唯一根(c)来计算，若并
+    //查集中没有元素则返-1
     //equations = [["a","b"],["b","c"]], values = [2.0,3.0],
     //queries = [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]]
     public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
         int equationSize = equations.size();
 
         UnionFind unionFind = new UnionFind(2 * equationSize);
-        Map<String,Integer> hashMap = new HashMap<>(2 * equationSize);
+        Map<String, Integer> hashMap = new HashMap<>(2 * equationSize);
         int id = 0;
         //第一步：预处理，把变量的值和id进行映射，就可以使用int数组来表示变量。
         for (int i = 0; i < equationSize; i++) {
-            List<String> equation =  equations.get(i);
+            List<String> equation = equations.get(i);
             String var1 = equation.get(0);
             String var2 = equation.get(1);
 
-            if(!hashMap.containsKey(var1)){
-                hashMap.put(var1,id);
+            if (!hashMap.containsKey(var1)) {
+                hashMap.put(var1, id);
                 id++;
             }
-            if(!hashMap.containsKey(var2)){
-                hashMap.put(var2,id);
+            if (!hashMap.containsKey(var2)) {
+                hashMap.put(var2, id);
                 id++;
             }
             //把id作为合并的值，并且传入权值
-            unionFind.union(hashMap.get(var1),hashMap.get(var2),values[i]);
+            unionFind.union(hashMap.get(var1), hashMap.get(var2), values[i]);
         }
         //第2步：做查询
         int queriesSize = queries.size();
@@ -84,22 +87,21 @@ public class Problem_399 {
 
             Integer id1 = hashMap.get(var1);
             Integer id2 = hashMap.get(var2);
-            if(id1==null || id2==null){
+            if (id1 == null || id2 == null) {
                 res[i] = -1.0;
-            }
-            else {
-                res[i] = unionFind.isConnected(id1,id2);
+            } else {
+                res[i] = unionFind.isConnected(id1, id2);
             }
         }
         return res;
     }
 
-    //并查
-    private class UnionFind{
-        //例如parent[0] = 1表示0节点的父节点是1
+    //并查.举例数据 a/b=2 b/c=3
+    private class UnionFind {
+        //如 parent[a] = b 即a指向b，a的父节点是b
         private int[] parent;
 
-        //节点指向父节点的权值
+        //权值，如weight[a] = 2
         private double[] weight;
 
         //初始化，所有节点指向自己parent=i。所以权值也是1
@@ -113,11 +115,19 @@ public class Problem_399 {
         }
 
         //合并两个id值，并且改变权值
-        public void union(int x,int y,double value){
+
+        /**
+         * 将root1指向root2，并设置权值为value
+         *
+         * @param x     root1
+         * @param y     root2
+         * @param value root1和root2之间的权值
+         */
+        public void union(int x, int y, double value) {
             int rootX = find(x);
             int rootY = find(y);
             //如果两个节点根节点一样，说明不需要合并
-            if(rootX == rootY)return;
+            if (rootX == rootY) return;
 
             //把x父节点指向y父节点并且更新root权值
             parent[rootX] = rootY;
@@ -125,28 +135,28 @@ public class Problem_399 {
         }
 
         /**
-         * 路径压缩
+         * 查询，查询过程中会进行路径压缩
+         *
          * @param x
          * @return x的根节点
          */
-        public int find(int x){
-            if(x!=parent[x]){
+        public int find(int x) {
+            if (x != parent[x]) {
                 int origin = parent[x];
-                //参数为父亲节点一直往上找
+                //直到找到最上层的根，设置当前节点parent为它，同时整个过程中更新权值
                 parent[x] = find(parent[x]);
-                weight[x] *= weight[origin];
+                weight[x] = weight[x] * weight[origin];
             }
             return parent[x];
         }
 
-        public double isConnected(int x,int y){
+        public double isConnected(int x, int y) {
             int rootX = find(x);
             int rootY = find(y);
             //如果联通则返回他们的权值比
-            if(rootX==rootY){
+            if (rootX == rootY) {
                 return weight[x] / weight[y];
-            }
-            else {
+            } else {
                 return -1.0d;
             }
         }

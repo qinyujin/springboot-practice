@@ -24,6 +24,7 @@ public class Problem_139 {
         for (int i = 0; i < s.length(); i++) {
             if(!dp[i])continue;
             for (String word : wordDict) {
+                //如果i前面的字符串已经匹配(s.startWith(word,i))，说明此时j位置的结果取决于后面的字符
                 if(i+word.length() <= s.length() && s.startsWith(word,i)){
                     dp[i+word.length()] = true;
                 }

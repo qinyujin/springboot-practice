@@ -32,6 +32,7 @@ public class Problem_221 {
         //如果长度不超过2，那么正方形最大只能是0或者1
         int[][] dp = new int[matrix.length][matrix[0].length];
         int max = 0;
+        //初始化
         for (int i = 0; i < matrix.length; i++) {
             if(matrix[i][0] == '0')dp[i][0] = 0;
             else {

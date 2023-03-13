@@ -24,6 +24,7 @@ public class Problem_208 {
 
         public TrieNode() {
             isEnd = false;
+            //26个字母(当前仅小写英文的情况)
             next = new TrieNode[26];
         }
     }

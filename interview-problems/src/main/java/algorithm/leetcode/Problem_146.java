@@ -75,7 +75,8 @@ public class Problem_146 {
     }
 
     private int capacity;
-    private Map<Integer,Node> map;
+    //结构可以使用LinkedHashMap，这里也是类似的模拟了数组+链表的形式，数组使用的map
+    private Map<Integer, Node> map;
     private DoubleLinkedList linkedList;
     //在题目中修改为LRUCache
     public Problem_146(int capacity) {
