@@ -38,6 +38,7 @@ public class Problem_5 {
     }
 
     /**
+     * 回文串的两种形式：aba bb 因为这两种的区别，所以设计参数为left和right
      * 拿到left和right，通过扩散方法寻找回文串。
      * 当left=right时，说明是奇数回文串。不等说明是偶数回文串
      * @param str
