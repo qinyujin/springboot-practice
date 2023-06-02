@@ -1,6 +1,6 @@
 package algorithm.leetcode;
 
-import java.util.LinkedList;
+import java.util.Stack;
 
 /**
  * @author :覃玉锦
@@ -71,31 +71,29 @@ public class Problem_394 {
 
     //通过栈来完成
     public String decodeString_2(String s) {
-        LinkedList<Integer> numStack = new LinkedList();
-        LinkedList<String> strStack = new LinkedList<>();
-
-        int multi = 0;
-        StringBuilder res = new StringBuilder();
+        Stack<Integer> numStack = new Stack<>();
+        Stack<StringBuilder> strStack = new Stack<>();
+        StringBuilder cur = new StringBuilder();
+        int num = 0;
         for (char c : s.toCharArray()) {
-            if (c >= '0' && c <= '9') {
-                multi = multi * 10 + Integer.parseInt(c + "");
+            if (Character.isDigit(c)) {
+                num = num * 10 + (c - '0');
             } else if (c == '[') {
-                numStack.addLast(multi);
-                strStack.addLast(res.toString());
-                multi = 0;
-                res = new StringBuilder();
+                numStack.push(num);
+                strStack.push(cur);
+                cur = new StringBuilder();
+                num = 0;
             } else if (c == ']') {
-                StringBuilder temp = new StringBuilder();
-                Integer times = numStack.removeLast();
-                for (Integer i = 0; i < times; i++) {
-                    temp.append(res);
+                StringBuilder tmp = cur;
+                cur = strStack.pop();
+                for (int i = numStack.pop(); i > 0; i--) {
+                    cur.append(tmp);
                 }
-                res = new StringBuilder(strStack.removeLast() + temp);
             } else {
-                res.append(c);
+                cur.append(c);
             }
         }
-
-        return res.toString();
+        return cur.toString();
     }
+
 }

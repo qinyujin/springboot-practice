@@ -21,6 +21,7 @@ public class Problem_3 {
         for (int i = 0; i < s.length(); i++) {
             //出现重复字符
             if (map.containsKey(s.charAt(i))) {
+                //当前字符出现重复，舍弃掉该字符，以下一个字符为起点找新的子串
                 left = Math.max(left, map.get(s.charAt(i)) + 1);
             }
 

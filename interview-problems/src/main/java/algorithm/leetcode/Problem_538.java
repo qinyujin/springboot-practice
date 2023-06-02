@@ -29,7 +29,7 @@ public class Problem_538 {
 
     private int sum;
     public TreeNode convertBST(TreeNode root) {
-        //右左根来递归，然后sum累加即可
+        //右根左来递归，然后sum累加即可
         if(root!=null){
             convertBST(root.right);
             sum+=root.val;

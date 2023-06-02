@@ -21,12 +21,14 @@ public class Problem_238 {
     //那么整个求解就可以通过先遍历前缀求出前缀积，再从后往前求后缀，然后相乘
     public int[] productExceptSelf(int[] nums) {
         int[] result = new int[nums.length];
-        for (int i = 0,product = 1; i < nums.length;product*=nums[i],i++) {
+        for (int i = 0,product = 1; i < nums.length;i++) {
             result[i] = product;
+            product*=nums[i];
         }
-        for (int i = nums.length-1,product = 1; i >= 0;product*=nums[i],i--) {
+        for (int i = nums.length-1,product = 1; i >= 0;i--) {
             //前缀乘后缀
             result[i]*=product;
+            product*=nums[i];
         }
         return result;
     }

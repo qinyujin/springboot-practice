@@ -16,6 +16,7 @@ public class Problem_279 {
         //dp[i]:i数字可有最少的平方数数量
         int[] dp = new int[n+1];
         for (int i = 1; i <= n; i++) {
+            //最多次数是全部由1组成
             dp[i] = i;
             for(int j = 1;i-j*j >=0;j++){
                 //相当于i 可以由 i-j*j 推导出来.j*j为平方数

@@ -8,6 +8,7 @@ import java.util.Random;
 /**
  * @author :覃玉锦
  * @create :2023-03-17 13:26:00
+ * o(1)时间插入、删除和获取随机元素
  *
  * https://leetcode.cn/problems/insert-delete-getrandom-o1/
  */
@@ -38,6 +39,7 @@ public class Problem_380 {
         if(!indexes.containsKey(val))return false;
         Integer index = indexes.get(val);
         Integer last = nums.get(nums.size() - 1);
+        //把last元素交换到了删除元素的位置上
         nums.set(index,last);
         indexes.put(last, index);
         nums.remove(nums.size()-1);

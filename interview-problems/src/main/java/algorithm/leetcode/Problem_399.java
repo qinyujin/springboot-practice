@@ -1,5 +1,7 @@
 package algorithm.leetcode;
 
+import javafx.util.Pair;
+
 import java.util.*;
 
 /**
@@ -160,5 +162,59 @@ public class Problem_399 {
                 return -1.0d;
             }
         }
+    }
+
+
+
+    //dfs方式实现
+    public double[] calcEquation2(List<List<String>> equations, double[] values, List<List<String>> queries) {
+        // 构建HashMap保存方程式和结果.a->[b,a/b的值]
+        Map<String, List<Pair<String, Double>>> map = new HashMap<>();
+        for (int i = 0; i < equations.size(); i++) {
+            String a = equations.get(i).get(0);
+            String b = equations.get(i).get(1);
+            double value = values[i];
+            if (!map.containsKey(a)) {
+                map.put(a, new ArrayList<Pair<String, Double>>());
+            }
+            if (!map.containsKey(b)) {
+                map.put(b, new ArrayList<Pair<String, Double>>());
+            }
+            map.get(a).add(new Pair<String, Double>(b, value));
+            map.get(b).add(new Pair<String, Double>(a, 1.0 / value));
+        }
+
+        // 对于每个查询，使用DFS在HashMap中搜索路径
+        double[] result = new double[queries.size()];
+        for (int i = 0; i < queries.size(); i++) {
+            String a = queries.get(i).get(0);
+            String b = queries.get(i).get(1);
+            Set<String> visited = new HashSet<>();
+            result[i] = dfs(a, b, visited, map);
+        }
+        return result;
+    }
+
+    private double dfs(String a, String b, Set<String> visited, Map<String, List<Pair<String, Double>>> map) {
+        if (!map.containsKey(a) || !map.containsKey(b)) {
+            return -1.0;
+        }
+        if (a.equals(b)) {
+            return 1.0;
+        }
+        visited.add(a);
+        for (Pair<String, Double> pair : map.get(a)) {
+            String next = pair.getKey();
+            double value = pair.getValue();
+            if (visited.contains(next)) {
+                continue;
+            }
+            double subResult = dfs(next, b, visited, map);
+            if (subResult != -1.0) {
+                return value * subResult;
+            }
+        }
+        visited.remove(a);
+        return -1.0;
     }
 }

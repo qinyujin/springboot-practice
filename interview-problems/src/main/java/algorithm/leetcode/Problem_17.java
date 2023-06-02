@@ -14,7 +14,7 @@ public class Problem_17 {
     public static void main(String[] args) {
         Problem_17 p = new Problem_17();
         System.out.println(p.letterCombinations("23"));
-        System.out.println(p.queue("23"));
+        System.out.println(p.queueMethod("23"));
     }
 
     /**
@@ -48,7 +48,7 @@ public class Problem_17 {
             combinations.add(combination.toString());
             return;
         }
-        //1、逻辑处理，遍历每一个字符串，同时在每一步都往下递归
+        //1、逻辑处理，遍历每一个字符串，同时在每一步都往下一位digit递归
         //如digits = "23" ， index=0 这里就可以取到2
         char digit = digits.charAt(index);
         //获取字符串，形如"abc"
@@ -68,7 +68,7 @@ public class Problem_17 {
      * @param digit
      * @return
      */
-    public List<String> queue(String digit) {
+    public List<String> queueMethod(String digit) {
         Queue<String> queue = new LinkedList<>();
         HashMap<Character, String> letterMappingTable = initLetterMappingTable();
         List<String> resArr = new ArrayList<>();

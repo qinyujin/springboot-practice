@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /**
  * @author :覃玉锦
- * @create :2023-03-21 14:11:00
+ * @create :2023-03-21 14:11:01
  * <p>
  * 三个数的最大乘积
  * https://leetcode.cn/problems/maximum-product-of-three-numbers/

@@ -2,7 +2,7 @@ package algorithm.leetcode;
 
 /**
  * @author :覃玉锦
- * @create :2021-03-19 22:23:00
+ * @create :2021-03-19 22:23:01
  * 戳气球
  * https://leetcode-cn.com/problems/burst-balloons/
  */
@@ -15,7 +15,8 @@ public class Problem_312 {
     }
 
     //https://leetcode-cn.com/problems/burst-balloons/solution/zhe-ge-cai-pu-zi-ji-zai-jia-ye-neng-zuo-guan-jian-/
-    //状态转移方程为 dp[l][r] = dp[l][k] + temp[l]*temp[k]*temp[r] + dp[k][r] 由于单独元素的左右看成1，所以
+    //假设dp[l][r]为区间[l,r]中能获得的最多的金币。
+    // 状态转移方程为 dp[l][r] = dp[l][k] + temp[l]*temp[k]*temp[r] + dp[k][r]
     public int maxCoins(int[] nums) {
         int n = nums.length;
         //给nums前后塞个0，方便边界值处理.原nums范围[1,n]

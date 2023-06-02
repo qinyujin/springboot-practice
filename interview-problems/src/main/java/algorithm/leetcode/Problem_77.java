@@ -7,13 +7,14 @@ import java.util.List;
 
 /**
  * @author :覃玉锦
- * @create :2023-03-16 13:58:00
- * <p>
+ * @create :2023-03-16 13:58:01
+ * 组合
  * https://leetcode.cn/problems/combinations/
  */
 public class Problem_77 {
     public static void main(String[] args) {
-
+        Problem_77 p = new Problem_77();
+        System.out.println(p.combine(4, 2));
     }
 
     public List<List<Integer>> combine(int n, int k) {

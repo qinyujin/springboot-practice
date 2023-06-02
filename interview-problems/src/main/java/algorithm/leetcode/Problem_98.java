@@ -4,7 +4,7 @@ import algorithm.offer.TreeNode;
 
 /**
  * @author :覃玉锦
- * @create :2021-03-12 11:22:00
+ * @create :2021-03-12 11:22:01
  * 验证二叉搜索树
  * https://leetcode-cn.com/problems/validate-binary-search-tree/
  */
@@ -21,21 +21,17 @@ public class Problem_98 {
     }
 
     private long pre = Long.MIN_VALUE;
-
     //中序为左、根、右，正好符合二叉搜索树的排序特点，因此使用中序遍历来判断
     public boolean isValidBST(TreeNode root) {
         if (root == null) return true;
 
         //左子树即使为true，最终结果也还需要判断右子树
-        if (!isValidBST(root.left)) {
-            return false;
-        }
+        boolean leftValid = isValidBST(root.left);
         //根节点
-        if (root.val <= pre) {
-            return false;
-        }
+        boolean valid = root.val > pre;
         pre = root.val;
         //右子树
-        return isValidBST(root.right);
+        boolean rightValid = isValidBST(root.right);
+        return leftValid && valid && rightValid;
     }
 }

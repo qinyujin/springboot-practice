@@ -43,9 +43,11 @@ public class Problem_206 {
         if (head == null || head.next == null) {
             return head;
         }
+        //函数的意义为返回链表尾部元素作为head，因此返回条件为上面的
         ListNode cur = reverseList_recycle(head.next);
         //从后往前链
         head.next.next = head;
+        //对应tail.next=null
         head.next = null;
         return cur;
     }

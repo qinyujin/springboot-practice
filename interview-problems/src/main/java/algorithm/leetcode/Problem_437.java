@@ -32,23 +32,25 @@ public class Problem_437 {
 
     public int pathSum(TreeNode root, int sum) {
         //key：前缀和 value：前缀和数量
-        Map<Long, Integer> prefixSum = new HashMap<>();
-        prefixSum.put(0L, 1);
-        return recursionPathSum(root, prefixSum, sum, 0L);
+        Map<Long, Integer> prefixMap = new HashMap<>();
+        prefixMap.put(0L, 1);
+        return recursionPathSum(root, prefixMap, sum, 0L);
     }
 
-    public int recursionPathSum(TreeNode node, Map<Long, Integer> prefixSum, int target, long curSum) {
+    public int recursionPathSum(TreeNode node, Map<Long, Integer> map, int target, long curSum) {
         if (node == null) return 0;
         int res = 0;
         curSum += node.val;
         //举例:在此题示例数据中，前缀和为18会出现3次(其他的都是1次),
-        res += prefixSum.getOrDefault(curSum - target, 0);
+        res += map.getOrDefault(curSum - target, 0);
         //前缀和数量+1或者0+1
-        prefixSum.put(curSum, prefixSum.getOrDefault(curSum, 0) + 1);
-        res += recursionPathSum(node.left, prefixSum, target, curSum);
-        res += recursionPathSum(node.right, prefixSum, target, curSum);
+        map.put(curSum, map.getOrDefault(curSum, 0) + 1);
+        res += recursionPathSum(node.left, map, target, curSum);
+        res += recursionPathSum(node.right, map, target, curSum);
 
-        prefixSum.put(curSum, prefixSum.get(curSum) - 1);
+        //分别递归了左子树、右子树。比如把左子树的前缀和遍历完了准备遍历右子树的时候，没删除map，那么右子树会使用现在的map进行重复计算
+        //但是一个节点只能选择左子或右子
+        map.put(curSum, map.getOrDefault(curSum, 0) - 1);
         return res;
     }
 }

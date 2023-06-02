@@ -17,7 +17,8 @@ public class Problem_239 {
         System.out.println(Arrays.toString(ints));
     }
 
-    //可以维护一个保持递减的队列，保证队列中元素都在窗口内。这样可以随时拿到窗口内最大值(队首元素)
+    //思路:使用一个队列维护窗口内最大值，只需要保证队首是最大值就行，同时要注意窗口滑动后失效的数要从队列中拿走。队列的性质是先进先出
+    //因此如果要让队首保证最大的话需要构建一个递减队列
     public int[] maxSlidingWindow(int[] nums, int k) {
         if (nums == null || nums.length < 2) return nums;
         // 双向队列 保存当前窗口最大值的数组位置 保证队列中数组位置的数值按从大到小排序

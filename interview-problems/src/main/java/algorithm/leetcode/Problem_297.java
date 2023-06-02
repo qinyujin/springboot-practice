@@ -4,9 +4,9 @@ import algorithm.offer.TreeNode;
 
 /**
  * @author :覃玉锦
- * @create :2021-03-15 17:23:01
- * 二叉树的序列化和反序列化
+ * @create :2021-03-15 17:23:02
  * https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/
+ * 二叉树的序列化和反序列化
  * <p>
  * 剑指37
  */

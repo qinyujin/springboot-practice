@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * @author :覃玉锦
- * @create :2021-03-12 20:43:00
+ * @create :2021-03-12 20:43:01
  * 找到所有数组中消失的数字
  * https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/
  */
@@ -34,5 +34,24 @@ public class Problem_448 {
             }
         }
         return ret;
+    }
+
+    //nums[i] 属于[1,n]，可以把nums[i]映射为下标index,把nums[index]变成负数。最后遍历数组为正数的说明下标可以加入到结果
+    public List<Integer> findDisappearedNumbers_2(int[] nums) {
+        for (int i = 0; i < nums.length; i++) {
+            //由于是[1,n] 映射成下标需要-1
+            int index = Math.abs(nums[i]) - 1;
+            if (nums[index] > 0) {
+                nums[index] = -nums[index];
+            }
+        }
+
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                res.add(i + 1);
+            }
+        }
+        return res;
     }
 }

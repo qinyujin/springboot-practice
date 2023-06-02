@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @author :覃玉锦
- * @create :2021-03-10 14:38:00
+ * @create :2021-03-10 14:38:01
  * 组合总和
  * https://leetcode.cn/problems/combination-sum/solution/hui-su-suan-fa-jian-zhi-python-dai-ma-java-dai-m-2/
  */
@@ -39,6 +39,13 @@ public class Problem_39 {
             res.add(new ArrayList<>(path));
             return;
         }
+        //这种写法会产生重复的数据。因为每一层会重复使用。解决办法就是第i层从第i个元素开始使用
+        /*for (int i = 0; i < candidates.length; i++) {
+            cur.add(candidates[i]);
+            backtrace(candidates, target - candidates[i], res, cur);
+            cur.remove(cur.size() - 1);
+        }*/
+
         for (int i = begin; i < candidates.length; i++) {
             path.addLast(candidates[i]);
             dfs(candidates, i, target - candidates[i], res, path);

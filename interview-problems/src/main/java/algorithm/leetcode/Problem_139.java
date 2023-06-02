@@ -1,6 +1,7 @@
 package algorithm.leetcode;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -13,20 +14,28 @@ public class Problem_139 {
     public static void main(String[] args) {
         Problem_139 p = new Problem_139();
         String s = "catsandog";
-        List<String> wordDict = new ArrayList<String>(){{add("cats");add("dog");add("sand");add("and");add("cat");}};
+        List<String> wordDict = new ArrayList<String>() {{
+            add("cats");
+            add("dog");
+            add("sand");
+            add("and");
+            add("cat");
+        }};
         System.out.println(p.wordBreak(s, wordDict));
     }
 
-    //思路：使用dp，如果s.startWith(wordDict[j],i) 那么说明dp[i]是true，即s可以拆分为到i
     public boolean wordBreak(String s, List<String> wordDict) {
-        boolean[] dp = new boolean[s.length()+1];
+        //dp[i]:s[0,i]可以组成单词,在wordDict中能找到
+        boolean[] dp = new boolean[s.length() + 1];
+        HashSet<String> set = new HashSet<>(wordDict);
+        //仅用于初始化
         dp[0] = true;
-        for (int i = 0; i < s.length(); i++) {
-            if(!dp[i])continue;
-            for (String word : wordDict) {
-                //如果i前面的字符串已经匹配(s.startWith(word,i))，说明此时j位置的结果取决于后面的字符
-                if(i+word.length() <= s.length() && s.startsWith(word,i)){
-                    dp[i+word.length()] = true;
+        for (int i = 1; i <= s.length(); i++) {
+            //[0,j] 和 [j,i] 两个区间，[0,j]区间能否组成单词由dp[j]决定
+            for (int j = 0; j < i; j++) {
+                if(dp[j] && set.contains(s.substring(j,i))){
+                    dp[i] = true;
+                    break;
                 }
             }
         }

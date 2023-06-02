@@ -3,6 +3,7 @@ package algorithm.leetcode;
 /**
  * @author :覃玉锦
  * @create :2021-03-03 13:26:00
+ * 正则表达式匹配
  * 正则表达式，可以参考剑指offer的19题
  * <p>
  * https://leetcode.cn/problems/regular-expression-matching/solution/shou-hui-tu-jie-wo-tai-nan-liao-by-hyj8/
@@ -20,7 +21,7 @@ public class Problem_10 {
     1、condition:s[i-1]==p[j-1] || p[j-1]=='.' dp[i][j] = dp[i-1][j-1]   满足此条件，该位置匹配成功，整串的匹配结果取决于字串的匹配结果
     2、condition:s[i-1] != p[i-1] 此时，若p[i-1]为*还有可能匹配成功，因此分析a*的情况。p[j-1]为*的话还需要比较s[i-1]和p[j-2]的值是否相同
     2_1、s[i-1] == p[j-2] x* 可以分成3种情况：x出现0次、1、n(n>=2)次。继续具体分析下面3种情况
-    2_1_1、x*->0 由于x出现0次，可看作把x*串在p串中移除掉。示例串变为:"aa(b*)d",因此此时需要比较的是字串s[i-1]==p[j-3] 即dp[i-1][j-1] = dp[i-1][j-3] <==> dp[i][j] = dp[i][j-2]
+    2_1_1、x*->0 由于x出现0次，可看作把x*串在p串中移除掉。示例串变为:"aa(b*)d",因此此时需要比较的是字串s[i-1]==s[j-3] 即 dp[i][j] = dp[i][j-2]
     2_1_2、x*->1 x出现1次，由于2_1条件就是 s[i-1]==p[j-2]，因此判断字段s[i-2]==p[j-3]? 即dp[i-1][j-1] = dp[i-2][j-3] <==> dp[i][j] = dp[i-1][j-2]
     2_1_3、x*->n x出现次数>=2，由2_1得s[i-1]==p[j-2]，因此可以同时移除一个末尾x。p串可以看成aab*(b)d，s串是aab(b)d。移除后现在的情况等同于2_1，即p的位置为*。
     因此可理解为移除一个，回到2_1再匹配.那么可以写成s[i-2]==p[j-1] 即 dp[i-1][j-1] = dp[i-2][j-1] <==> dp[i][j] = dp[i-1][j]

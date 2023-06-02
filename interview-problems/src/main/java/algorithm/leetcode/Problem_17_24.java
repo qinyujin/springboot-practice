@@ -4,6 +4,7 @@ package algorithm.leetcode;
  * @author :覃玉锦
  * @create :2023-03-15 11:29:00
  *
+ * 最大子矩阵
  * https://leetcode.cn/problems/max-submatrix-lcci/
  */
 public class Problem_17_24 {
@@ -42,6 +43,7 @@ public class Problem_17_24 {
                         sum += b[k];
                     } else {
                         sum = b[k];
+                        //i是因为矩阵左上角是从i开始往下扫
                         leftRow = i;
                         leftCol = k;
                     }

@@ -4,7 +4,7 @@ import algorithm.offer.ListNode;
 
 /**
  * @author :覃玉锦
- * @create :2021-03-12 20:23:00
+ * @create :2021-03-12 20:23:01
  * 回文链表
  * https://leetcode-cn.com/problems/palindrome-linked-list/
  */

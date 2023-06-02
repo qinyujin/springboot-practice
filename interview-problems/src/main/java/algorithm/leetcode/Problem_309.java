@@ -30,7 +30,7 @@ public class Problem_309 {
         dp[0][2] = 0;
 
         for (int i = 1; i < prices.length; i++) {
-            //i天不持股不卖出，昨天不持股的两种可能都行
+            //i天不持股不卖出，如果昨天持股的话，那么今天不持股只能是卖出了，因此昨天必须是不持股
             dp[i][0] = Math.max(dp[i-1][0],dp[i-1][2]);
             //i天持股昨天一定不可能是卖出(冷冻期),其他两种都可能
             dp[i][1] = Math.max(dp[i-1][1],dp[i-1][0]-prices[i]);

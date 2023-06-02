@@ -4,7 +4,7 @@ import java.util.HashSet;
 
 /**
  * @author :覃玉锦
- * @create :2021-03-19 21:49:00
+ * @create :2021-03-19 21:49:01
  * 最长连续序列
  * https://leetcode-cn.com/problems/longest-consecutive-sequence/
  */
@@ -15,8 +15,7 @@ public class Problem_128 {
         System.out.println(p.longestConsecutive(nums));
     }
 
-    //可以使用哈希，如果一个数的n-1存在于set之中，跳过。直到找到n-1不存在于集合中，那么说明这个数至少是
-    //递增的第一个数，然后一直找它的n+1存在否，同时统计长度
+    //可以想办法找到连续序列的第一个数，然后连续找。可以使用set来实现。需要找set中num-1不存在的数则表明num是连续序列第一个数
     public int longestConsecutive(int[] nums) {
         HashSet<Integer> set = new HashSet<>();
         //去重

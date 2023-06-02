@@ -67,7 +67,7 @@ public class Problem_84 {
             int height = heights[stack.pop()];
 
             int width;
-            //根据栈单调递增的性质推导出width
+            //如果是最后一个小的数，即最小，那么宽度应该为全部
             if(stack.isEmpty()){
                 width = len;
             }else {

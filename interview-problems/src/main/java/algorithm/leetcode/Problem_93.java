@@ -56,6 +56,7 @@ public class Problem_93 {
         int addr = 0;
         for (int segEnd = segStart; segEnd < s.length(); ++segEnd) {
             addr = addr * 10 + (s.charAt(segEnd) - '0');
+            //0在前面处理
             if (addr > 0 && addr <= 255) {
                 segments[segId] = addr;
                 dfs(s, segId + 1, segEnd + 1);

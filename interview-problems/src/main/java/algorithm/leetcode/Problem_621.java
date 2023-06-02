@@ -15,7 +15,7 @@ public class Problem_621 {
 
     // 桶思想找出规律
     // https://leetcode-cn.com/problems/task-scheduler/solution/tong-zi-by-popopop/
-    // (公式是桶个数-1)*(n+1)+最后一行元素数
+    // (公式是桶个数-1)*(n+1)+最后一行元素数 如果出现所需任务超过格子的情况，那么次数为元素数。所以两者中取最大
     public int leastInterval(char[] tasks, int n) {
         int[] temp = new int[26];
         int countMaxTask = 0;

@@ -28,6 +28,7 @@ public class Problem_301 {
         boolean found = false;
         while (!queue.isEmpty()){
             int size = queue.size();
+            //对每一个字符串单独搜索。没找到就删除字符串中每一个括号再次进行搜索.同时借助set去重处理
             for (int i = 0; i < size; i++) {
                 String front = queue.poll();
                 if(isValid(front)){
@@ -48,6 +49,7 @@ public class Problem_301 {
                     }
                 }
             }
+            //要求删除最少数量的括号，因此一旦搜索到了符合条件的就可以退出
             if(found)break;
         }
         return res;

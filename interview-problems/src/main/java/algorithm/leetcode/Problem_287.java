@@ -39,12 +39,15 @@ public class Problem_287 {
     }
 
     //不修改原数组，空间o1的解法.https://leetcode.cn/problems/find-the-duplicate-number/solution/287xun-zhao-zhong-fu-shu-by-kirsche/
-    //构建一条链表，指向为 i -> nums[i].重复的节点在此题的条件下(n+1个数、1个重复值，范围[1,n])会构成循环链表，找到循环节点即可
+    //构建一条链表，指向为 i -> nums[i].重复的节点在此题的条件下(n+1个数、1个重复值，范围[1,n])会构成循环链表，找到循环节点即可。为什么
+    //一定会构成环?因为出现了重复的映射，理论上会映射到同一节点
     //链表和数组的对应关系：x.next = y  <==> nums[x] = y
     public int findDuplicate2(int[] nums) {
         int fast = nums[nums[0]], slow = nums[0];
         while (fast != slow) {
+            //fast.next.next
             fast = nums[nums[fast]];
+            //slow.next
             slow = nums[slow];
         }
 
