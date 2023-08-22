@@ -20,27 +20,25 @@ public class Problem_19 {
         System.out.println(p.removeNthFromEnd(r1, 2));
     }
 
+    //倒数第n个节点，说明删除节点和尾部间距为n，可以利用这个特点，结合快慢指针来实现
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        //思路:当cur 走了 n次，del再走从头一起走。当cur走到空时即del走到了倒数n个节点。目标是为了保持这个n的间距。
-        //1(head) 2 3 null  由于这里简单定义的listNode是有next属性，因此需要找到删除节点的前一个，然后使用.next=.next.next来删除。
-        //即 如果n=1，那么当cur走到3时del再走
-        if (head == null) return null;
-        ListNode cur = head;
-        //删除的前一个节点.
-        ListNode del = head;
-        int count = 0;
-        while (cur != null) {
-            count++;
-            while (count > n + 1 && cur != null) {
-                //一起走到尾
-                del = del.next;
-                cur = cur.next;
-            }
-            if (cur != null) cur = cur.next;
+        ListNode fast = head;
+        ListNode slow = head;
+
+        for (int i = 0; i < n; i++) {
+            fast = fast.next;
         }
-        //第一个节点，删除第一个让下一个做头结点
-        if (count == n) head = head.next;
-        else del.next = del.next.next;
+
+        if (fast == null) {
+            return head.next;
+        }
+
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+
+        slow.next = slow.next.next;
         return head;
     }
 }

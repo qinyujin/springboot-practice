@@ -2,10 +2,9 @@ package algorithm.leetcode;
 
 /**
  * @author :覃玉锦
- * @create :2021-03-02 16:49:00
- * 力扣热题第四题：
- * https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/xun-zhao-liang-ge-you-xu-shu-zu-de-zhong-wei-s-114/
+ * @create :2021-03-02 16:49:01
  * 双数组的中位数。
+ * https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/xun-zhao-liang-ge-you-xu-shu-zu-de-zhong-wei-s-114/
  * <p>
  * 思路：设定上数组为短。如果不是则交换，保证上短下长。然后有分割线，分割线即为中位线。
  */

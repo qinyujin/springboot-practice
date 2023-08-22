@@ -35,6 +35,13 @@
             <version>5.1.8.RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
+<!--        mybatis-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.2.0</version>
+        </dependency>
     </dependencies>
 
 
