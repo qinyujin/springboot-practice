@@ -16,6 +16,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class ArrayListUnsafe {
     public static void main(String[] args) {
+
 //        ArrayList<String> list = new ArrayList<>();
 //        List<Object> list = Collections.synchronizedList(new ArrayList<>());
         CopyOnWriteArrayList<String> list = new CopyOnWriteArrayList<>();
