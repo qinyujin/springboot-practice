@@ -28,6 +28,7 @@ public class JedisSingleTest {
             System.out.println(jedis.set("single", "yujin"));
             System.out.println(jedis.get("single"));
 
+            //管道可以一次性发送批量的操作，减少java客户端和redis的通信次数
             /*Pipeline pl = jedis.pipelined();
             for (int i = 0; i < 10; i++) {
                 pl.incr("pipelinekey");

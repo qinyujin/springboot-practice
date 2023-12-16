@@ -1,1 +1,1 @@
-包含redis的基本使用、高级使用、分布式集群下的使用等
+包含redis的基本使用、高级使用、分布式集群下的使用等.分布式锁看redlock01的goodsController

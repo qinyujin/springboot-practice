@@ -32,4 +32,11 @@ public class IndexController {
             }
         }
     }
+
+    @RequestMapping("/test_cluster")
+    public void testCluster() {
+        String key = "yujin";
+        stringRedisTemplate.opsForValue().set(key, "666");
+        System.out.println(stringRedisTemplate.opsForValue().get(key));
+    }
 }
