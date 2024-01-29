@@ -29,6 +29,7 @@
         <module>dubbo3.0-simulate</module>
         <module>ElasticSearch</module>
         <module>myRedis</module>
+        <module>mongodb-demo</module>
     </modules>
     <!--    springboot 依赖-->
         <parent>

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -65,7 +64,7 @@ public class GoodsController {
 //        Boolean flag = template.opsForValue().setIfAbsent(REDIS_LOCK, value);
         //为了避免宕机不进入finally而无法解锁，设置一个过期时间,但是这样保证不了原子性，因为先设置了key才设置时间，如果此时宕机
         //没有设置上时间，结果一样。如何解决：使用带时间的setnx。
-        template.expire(REDIS_LOCK, 10L, TimeUnit.SECONDS);
+//        template.expire(REDIS_LOCK, 10L, TimeUnit.SECONDS);
         Boolean flag = template.opsForValue().setIfAbsent(REDIS_LOCK, value, 10L, TimeUnit.SECONDS);
         if (!flag) {
             return "抢锁失败!!";
@@ -87,30 +86,30 @@ public class GoodsController {
             }
         } finally {
             //这里get和delete非原子性，有可能存在并发问题，可以采用lua脚本解决
-            if (template.opsForValue().get(REDIS_LOCK).equals(value)) {
-                template.delete(REDIS_LOCK);
-            }
+//            if (template.opsForValue().get(REDIS_LOCK).equals(value)) {
+//                template.delete(REDIS_LOCK);
+//            }
 
             //使用while+watch+事务来解决原子性。
-            while (true) {
-                //先监控锁，防止被改动
-                template.watch(REDIS_LOCK);
-                //可以开启事务
-                template.setEnableTransactionSupport(true);
-                if (template.opsForValue().get(REDIS_LOCK).equalsIgnoreCase(value)) {
-                    //开启事务
-                    template.multi();
-                    template.delete(REDIS_LOCK);
-                    List<Object> list = template.exec();
-                    //如果删除失败可以重试
-                    if (list == null) {
-                        continue;
-                    }
-                }
-                //如果成功删除了
-                template.unwatch();
-                break;
-            }
+//            while (true) {
+//                //先监控锁，防止被改动
+//                template.watch(REDIS_LOCK);
+//                //可以开启事务
+//                template.setEnableTransactionSupport(true);
+//                if (template.opsForValue().get(REDIS_LOCK).equalsIgnoreCase(value)) {
+//                    //开启事务
+//                    template.multi();
+//                    template.delete(REDIS_LOCK);
+//                    List<Object> list = template.exec();
+//                    //如果删除失败可以重试
+//                    if (list == null) {
+//                        continue;
+//                    }
+//                }
+//                //如果成功删除了
+//                template.unwatch();
+//                break;
+//            }
 
             //判断value并且删除lockKey,lua脚本原子性执行
             String unlockLuaScript = "if redis.call('get',KEYS[1]) == false then return 1 "
@@ -157,3 +156,4 @@ public class GoodsController {
         }
     }
 }
+
