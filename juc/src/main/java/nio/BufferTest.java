@@ -14,15 +14,15 @@ import java.nio.ByteBuffer;
  * limit：缓冲区能够操作的容量（limit之后都不能操作）
  * position：当前的位置，初始为0
  * mark：标记，配合reset使用，可以记录当前position位置，使用reset可以让position恢复。
- *
+ * <p>
  * 缓冲区常用方法：
  * 1、put 存值，改变position
- * 2、flip 切换到读取模式，改变position、limit
+ * 2、flip 切换模式，读/写相互切,改变position、limit.例如当前buffer存了一个长度是5的字符串，buffer大小是1024,此时变化为position=5 -> 0,limit = 1024 -> 5
  * 3、get 取值，改变position
  * 4、mark 记录position，配合reset使用
  * 5、reset 还原当前position到mark位置
  * 6、clear 清空缓冲区，但实质上只是变动指针，数据没动
- *
+ * <p>
  * 两种缓冲区：
  * 1、非直接缓冲区：使用allocate分配的缓冲区。想要读取硬盘的数据，就得通过操作系统、应用程序两者之间的两个缓冲区，不论读写都得进行数据的复制，基于jvm
  * 内存进行操作
@@ -34,74 +34,75 @@ import java.nio.ByteBuffer;
 public class BufferTest {
 
     @Test
-    public void test1(){
+    public void bufferTest() {
         String str = "abcde";
         //1、给缓冲区分配容量
         ByteBuffer buf = ByteBuffer.allocate(1024);
 
-        System.out.println("------------allocate()---------------");
-        System.out.println("capacity:"+buf.capacity());
-        System.out.println("limit:"+buf.limit());
-        System.out.println("position:"+buf.position());
+        soutBufFields(buf, "allocate");
 
         //2、使用put存数据，存完后position指针会移动到对应位置
         buf.put(str.getBytes());
-        System.out.println("------------put()---------------");
-        System.out.println("capacity:"+buf.capacity());
-        System.out.println("limit:"+buf.limit());
-        System.out.println("position:"+buf.position());
+        soutBufFields(buf, "put");
 
         //3、使用flip切换到读取模式，这时候position还原到上一次的起点，limit到上一次的终点
         buf.flip();
-        System.out.println("------------flip()---------------");
-        System.out.println("capacity:"+buf.capacity());
-        System.out.println("limit:"+buf.limit());
-        System.out.println("position:"+buf.position());
+        soutBufFields(buf, "flip");
 
         //4、使用get来读取数据
         byte[] dst = new byte[buf.limit()];
         buf.get(dst);
-        System.out.println("------------get()---------------");
+        soutBufFields(buf, "get");
         System.out.println(new String(dst));
-        System.out.println("capacity:"+buf.capacity());
-        System.out.println("limit:"+buf.limit());
-        System.out.println("position:"+buf.position());
-    }
 
-    @Test
-    public void test2(){
-        String str = "abcde";
-        ByteBuffer buf = ByteBuffer.allocate(1024);
+        //其他方法演示：
+        buf.clear();
+        soutBufFields(buf, "clear");
+
+        //compact和clear的区别是clear全部清，compact只清除读过的数据
+//        buf.compact();
+
         buf.put(str.getBytes());
+        soutBufFields(buf, "put");
 
-        System.out.println(buf.position());
         buf.flip();
-        byte[] dst = new byte[buf.limit()];
-        buf.get(dst,0,2);
-        System.out.println(buf.position());
+        soutBufFields(buf, "flip");
+
+        dst = new byte[buf.limit()];
+        buf.get(dst, 0, 2);
+        soutBufFields(buf, "get[0,2]");
+        System.out.println(new String(dst));
+
         //读取了两个，当前position2，使用mark记录
         buf.mark();
-        //又读取两个，当前position4，使用reset还原到2
-        buf.get(dst,2,2);
-        System.out.println(buf.position());
+        soutBufFields(buf, "mark");
 
+        //当前position为2，所以是从2开始读取，get方法的参数2,2表示在dst的index2位置添加长度为2的字符，position在2读完后变成4
+        buf.get(dst, 2, 2);
+        soutBufFields(buf, "get[2,2]");
+        System.out.println(new String(dst));
+
+        //reset把position置回到mark标记的position为2的时候
         buf.reset();
-        System.out.println(buf.position());
+        soutBufFields(buf, "reset");
 
-        //clear，重置指针位置，但不改变数据
-        buf.clear();
-        System.out.println("------------------------");
-        System.out.println(buf.capacity());
-        System.out.println(buf.limit());
-        System.out.println(buf.position());
-        System.out.println((char) buf.get());
+        System.out.println("是否是直接缓冲区:" + buf.isDirect());
+        //分配直接缓冲区
+        buf = ByteBuffer.allocateDirect(1024);
+        //判断是否是直接缓冲区
+        System.out.println("是否是直接缓冲区:" + buf.isDirect());
     }
 
-    @Test
-    public void test3(){
-        //分配直接缓冲区
-        ByteBuffer buf = ByteBuffer.allocateDirect(1024);
-        //判断是否是直接缓冲区
-        System.out.println(buf.isDirect());
+    /**
+     * 打印buf属性
+     *
+     * @param buf
+     * @param methodName
+     */
+    private void soutBufFields(ByteBuffer buf, String methodName) {
+        System.out.println("------------" + methodName + "()---------------");
+        System.out.println("capacity:" + buf.capacity());
+        System.out.println("limit:" + buf.limit());
+        System.out.println("position:" + buf.position());
     }
 }

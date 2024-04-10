@@ -3,7 +3,6 @@ package nio.mvc;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.lang.reflect.Proxy;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;

@@ -30,6 +30,7 @@
         <module>ElasticSearch</module>
         <module>myRedis</module>
         <module>mongodb-demo</module>
+        <module>netty-demo</module>
     </modules>
     <!--    springboot 依赖-->
         <parent>

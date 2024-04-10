@@ -9,7 +9,7 @@ import java.nio.channels.Pipe;
 /**
  * @author :覃玉锦
  * @create :2021-01-05 15:26:00
- * 管道是单向的，作用范围是线程之间
+ * 管道是单向的，作用范围是线程之间.通常用于两线程之间单向传输
  * Pipe.SinkChannel   负责发送数据
  * Pipe.SourceChannel 负责接收数据
  */
