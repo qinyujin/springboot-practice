@@ -1,6 +1,5 @@
 package com.aimer.framework.protocol.http;
 
-
 import com.aimer.framework.Invocation;
 import com.aimer.framework.register.LocalRegister;
 import org.apache.commons.io.IOUtils;
@@ -12,28 +11,33 @@ import java.io.ObjectInputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/**
- * @Author:yujinqin
- * @Date:2023/1/19 17:20
- */
 public class HttpServerHandler {
+
     public void handler(HttpServletRequest req, HttpServletResponse resp) {
+
         try {
             Invocation invocation = (Invocation) new ObjectInputStream(req.getInputStream()).readObject();
-
             String interfaceName = invocation.getInterfaceName();
-            String methodName = invocation.getMethodName();
+            Class implClass = LocalRegister.get(interfaceName);
+            Method method = implClass.getMethod(invocation.getMethodName(), invocation.getParamType());
+            String result = (String) method.invoke(implClass.newInstance(), invocation.getParams());
 
-            //在注册中心发现服务
-            Class clazz = LocalRegister.get(interfaceName);
-            Method method = clazz.getMethod(methodName, invocation.getParamTypes());
-            //调用接口的实例代码
-            String result = (String) method.invoke(clazz.newInstance(), invocation.getParams());
-
+            System.out.println("tomcat:" + result);
             IOUtils.write(result, resp.getOutputStream());
-
-        } catch (IOException | ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | InstantiationException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+
     }
 }

@@ -7,23 +7,15 @@ import org.apache.catalina.core.StandardEngine;
 import org.apache.catalina.core.StandardHost;
 import org.apache.catalina.startup.Tomcat;
 
-/**
- * @Author:yujinqin
- * @Date:2023/1/19 15:58
- * 模拟http协议通信
- */
 public class HttpServer {
 
-    //boot tomcat
     public void start(String hostname, Integer port) {
-        //start tomcat server...
 
-        // 创建tomcat服务器
         Tomcat tomcat = new Tomcat();
 
         Server server = tomcat.getServer();
         Service service = server.findService("Tomcat");
-        // 指定端口号
+
         Connector connector = new Connector();
         connector.setPort(port);
 
@@ -44,10 +36,8 @@ public class HttpServer {
         service.setContainer(engine);
         service.addConnector(connector);
 
-        //tomcat的所有请求通过dispatcher类转发处理
         tomcat.addServlet(contextPath, "dispatcher", new DispatcherServlet());
         context.addServletMappingDecoded("/*", "dispatcher");
-
 
         try {
             tomcat.start();
@@ -55,5 +45,7 @@ public class HttpServer {
         } catch (LifecycleException e) {
             e.printStackTrace();
         }
+
+
     }
 }

@@ -9,16 +9,8 @@ import com.aimer.provider.service.HelloService;
  */
 public class Consumer {
     public static void main(String[] args) {
-        //http method
-        /*Invocation invocation = new Invocation(HelloService.class.getName(), "sayHello", new Class[]{String.class}, new Object[]{"xxxtention"});
-
-        HttpClient httpClient = new HttpClient();
-        String resp = httpClient.send("localhost", 8081, invocation);
-        System.out.println("receives response:" + resp);*/
-
-        //rpc method. only care biz-Interface,no need to care about call details
-        HelloService proxyService = ProxyFactory.getProxy(HelloService.class);
-        String resp = proxyService.sayHello("xxx");
-        System.out.println(resp);
+        HelloService helloService = ProxyFactory.getProxy(HelloService.class);
+        String result = helloService.sayHello("你好");
+        System.out.println(result);
     }
 }

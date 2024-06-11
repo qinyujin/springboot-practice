@@ -11,14 +11,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * @Author:yujinqin
- * @Date:2023/1/19 17:45
- */
 public class HttpClient {
+
     public String send(String hostname, Integer port, Invocation invocation) {
 
         try {
+
             URL url = new URL("http", hostname, port, "/");
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
@@ -35,13 +33,13 @@ public class HttpClient {
             InputStream inputStream = httpURLConnection.getInputStream();
             String result = IOUtils.toString(inputStream);
             return result;
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "";
+        return null;
+
     }
 }

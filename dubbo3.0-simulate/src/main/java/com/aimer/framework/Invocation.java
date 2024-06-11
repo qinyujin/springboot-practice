@@ -2,21 +2,19 @@ package com.aimer.framework;
 
 import java.io.Serializable;
 
-/**
- * @Author:yujinqin
- * @Date:2023/1/19 17:24
- */
+
 public class Invocation implements Serializable {
+
     private String interfaceName;
     private String methodName;
-    private Class[] paramTypes;
     private Object[] params;
+    private Class[] paramType;
 
-    public Invocation(String interfaceName, String methodName, Class[] paramTypes, Object[] params) {
+    public Invocation(String interfaceName, String methodName, Object[] params, Class[] paramType) {
         this.interfaceName = interfaceName;
         this.methodName = methodName;
-        this.paramTypes = paramTypes;
         this.params = params;
+        this.paramType = paramType;
     }
 
     public String getInterfaceName() {
@@ -35,19 +33,19 @@ public class Invocation implements Serializable {
         this.methodName = methodName;
     }
 
-    public Class[] getParamTypes() {
-        return paramTypes;
-    }
-
-    public void setParamTypes(Class[] paramTypes) {
-        this.paramTypes = paramTypes;
-    }
-
     public Object[] getParams() {
         return params;
     }
 
     public void setParams(Object[] params) {
         this.params = params;
+    }
+
+    public Class[] getParamType() {
+        return paramType;
+    }
+
+    public void setParamType(Class[] paramType) {
+        this.paramType = paramType;
     }
 }

@@ -1,21 +1,29 @@
 package com.aimer.framework;
 
-/**
- * @Author:yujinqin
- * @Date:2023/1/20 10:28
- * <p>
- * 只是demo这样写，实际上dubbo的url还可以存如服务接口全限定名，接口下的方法名等都会保存在url中，dubbo只需要通过k(ip) v(url list/set)
- */
-public class URL {
+import java.io.Serializable;
+
+public class URL implements Serializable {
+
+    private String protocol;
     private String hostname;
     private Integer port;
+    private String interfaceName;
+    private Class implClass;
 
-    public URL() {
-    }
-
-    public URL(String hostname, Integer port) {
+    public URL(String protocol, String hostname, Integer port, String interfaceName, Class implClass) {
+        this.protocol = protocol;
         this.hostname = hostname;
         this.port = port;
+        this.interfaceName = interfaceName;
+        this.implClass = implClass;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
     }
 
     public String getHostname() {
@@ -32,5 +40,21 @@ public class URL {
 
     public void setPort(Integer port) {
         this.port = port;
+    }
+
+    public String getInterfaceName() {
+        return interfaceName;
+    }
+
+    public void setInterfaceName(String interfaceName) {
+        this.interfaceName = interfaceName;
+    }
+
+    public Class getImplClass() {
+        return implClass;
+    }
+
+    public void setImplClass(Class implClass) {
+        this.implClass = implClass;
     }
 }
