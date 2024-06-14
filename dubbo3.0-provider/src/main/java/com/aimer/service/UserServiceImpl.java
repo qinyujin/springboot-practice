@@ -5,31 +5,35 @@ package com.aimer.service;
 
 //com.aimer.proto 则是通过protobuf定义的接口类
 
+import com.aimer.User;
+import com.aimer.UserService;
+import org.apache.dubbo.common.stream.StreamObserver;
 import org.apache.dubbo.config.annotation.DubboService;
 
 /**
  * @Author:yujinqin
  * @Date:2023/1/18 14:39
- * <p>
  * Service层面提供服务处理逻辑
- * @DubboService 才能使用dubbo查询到
- * <p>
- * tiple的流式通信通常有三种：unary、server-stream、client-stream
+ * @DubboService 标记为一个dubbo服务
  */
 //@Service
-@DubboService(version = "1.0")
-public class UserServiceImpl implements com.aimer.proto.UserService {
+@DubboService
+public class UserServiceImpl implements UserService {
 
-    //common module
-    /*public String getUser() {
-        return "Aimer";
+    @Override
+    public User getUser() {
+        return new User("1", "yujin");
+    }
+
+    @Override
+    public String getUser(String username) {
+        return "getUser:" + username;
     }
 
     @Override
     public void sayHelloServerStream(String name, StreamObserver<String> response) {
-        //流式处理，可以处理多次
-        response.onNext("hello:" + name);
-        response.onNext("hello:" + name);
+        response.onNext(name + " hello");
+        response.onNext(name + " world");
         response.onCompleted();
     }
 
@@ -38,9 +42,8 @@ public class UserServiceImpl implements com.aimer.proto.UserService {
         return new StreamObserver<String>() {
             @Override
             public void onNext(String data) {
-                System.out.println("the servers receives data:" + data);
-
-                response.onNext("response result:" + data);
+                //接收客户端传输的数据，返回一些信息回去
+                response.onNext("result:" + data);
             }
 
             @Override
@@ -50,14 +53,8 @@ public class UserServiceImpl implements com.aimer.proto.UserService {
 
             @Override
             public void onCompleted() {
-                System.out.println("processed done");
+                System.out.println("completed");
             }
         };
-    }*/
-
-    //protobuf provide interface list. refer to main/java/proto/userservice.proto
-    @Override
-    public com.aimer.proto.User getUser(com.aimer.proto.UserRequest request) {
-        return com.aimer.proto.User.newBuilder().setUid(request.getUid()).setUserName("aimer").build();
     }
 }

@@ -11,8 +11,9 @@ public class DubboProtocol implements Protocol {
 
     @Override
     public void export(URL url) {
-        LocalRegister.regist(url.getInterfaceName(), url.getImplClass());
-        RemoteMapRegister.regist(url.getInterfaceName(), url);
+        //实际dubbo里会先启动网络服务再注册
+        LocalRegister.regist(url.getInterfaceName(), url.getImplClass()); // 接口名:实现类
+        RemoteMapRegister.regist(url.getInterfaceName(), url); //接口名:url
         new NettyServer().start(url.getHostname(), url.getPort());
     }
 

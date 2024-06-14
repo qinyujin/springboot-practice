@@ -12,6 +12,7 @@ import com.aimer.provider.service.impl.HelloServiceImpl;
  */
 public class Provider {
     public static void main(String[] args) {
+        //配置文件中读取使用的协议，比如dubbo、http
         String protocolName = System.getProperty("protocol");
 
         URL url = new URL(protocolName, "localhost", 8080, HelloService.class.getName(), HelloServiceImpl.class);

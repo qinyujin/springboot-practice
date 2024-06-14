@@ -23,6 +23,7 @@
             <version>2.7.3</version>
         </dependency>
 
+        <!--    dubbo协议    -->
         <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo-rpc-dubbo</artifactId>
@@ -36,6 +37,7 @@
             <version>3.0.7</version>
         </dependency>
 
+        <!--    使用zookeeper作为注册中心    -->
         <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo-registry-zookeeper</artifactId>
@@ -49,11 +51,11 @@
         </dependency>
 
         <!--    注册服务需要通过common模块，通过protobuf定义接口的话则不需要    -->
-        <!--<dependency>
+        <dependency>
             <groupId>com.aimer</groupId>
             <artifactId>dubbo3.0-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>-->
+        </dependency>
 
     </dependencies>
 

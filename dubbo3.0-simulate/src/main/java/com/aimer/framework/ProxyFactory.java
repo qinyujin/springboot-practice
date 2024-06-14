@@ -20,8 +20,10 @@ public class ProxyFactory<T> {
 
                 Invocation invocation = new Invocation(interfaceClass.getName(), method.getName(), args, method.getParameterTypes());
 
+                //根据不同协议获取到具体的invoker,例如dubboInvoker、httpInvoker、triInvoker
                 Invoker invoker = ClusterInvoker.join(interfaceClass);
 
+                //调用具体方法就是通过代理对象调invoke并且传invocation参数过去
                 return invoker.invoke(invocation);
 
             }
